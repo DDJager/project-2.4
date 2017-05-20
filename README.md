@@ -1,6 +1,6 @@
 # Project-2.4
 
-# Libraries die gebruikt zijn:
+# Libraries used:
 - Flask-RESTful (https://flask-restful.readthedocs.io/en/0.3.5/)
 - Flask-PyMongo (http://flask-pymongo.readthedocs.io/en/latest/)
 
