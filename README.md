@@ -1,7 +1,10 @@
-# project-2.4
-Project 2.4
+# Project-2.4
 
-How to install:
+# Libraries die gebruikt zijn:
+- Flask-RESTful (https://flask-restful.readthedocs.io/en/0.3.5/)
+- Flask-PyMongo (http://flask-pymongo.readthedocs.io/en/latest/)
+
+# How to install:
 - Install Python 3+
 - Install Pip (Add Python and pip to your PATH. It Comes with Python 3.4+)
 - Use "pip install virtualenv" to install virtualenv. With virtualenv you can use extensions without installing them globally on your computer.
@@ -11,3 +14,6 @@ use "venv\Scripts\activate.bat" (Windows) to switch to this application's enviro
 - Use "pip install -r requirements.txt" (in virtualenv mode) to install all python libraries to your virtual environment. NOTE: If you ever add a new library (like flask-redis
 ), use "pip freeze > requirements.txt" to write all the current pip installations along with the recently installed pip library to the requirements.txt file (For more info: https://pip.pypa.io/en/stable/reference/pip_freeze/)
 - To run the server, find out what Python file initializes/bootstraps the application and type "python file_name.py". The server will be running on http://127.0.0.1:5000/
+- Download and install MongoDB (https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+- Enable MongoDB authentication (https://docs.mongodb.com/master/tutorial/enable-authentication/)
+- Bekijk deze handige 30 minuten tutorial voor MongoDB (https://www.youtube.com/watch?v=pWbMrx5rVBE)
