@@ -10,3 +10,4 @@ This means that you can "pip install flask" or certain other flask libraries for
 use "venv\Scripts\activate.bat" (Windows) to switch to this application's environment. Type "deactivate" in the command line to switch back to the global environment.
 - Use "pip install -r requirements.txt" (in virtualenv mode) to install all python libraries to your virtual environment. NOTE: If you ever add a new library (like flask-redis
 ), use "pip freeze > requirements.txt" to write all the current pip installations along with the recently installed pip library to the requirements.txt file (For more info: https://pip.pypa.io/en/stable/reference/pip_freeze/)
+- To run the server, find out what Python file initializes/bootstraps the application and type "python file_name.py". The server will be running on http://127.0.0.1:5000/
