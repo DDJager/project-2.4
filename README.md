@@ -1,7 +1,7 @@
 # Project-2.4
 
 # Libraries used:
-- Flask-RESTful (https://flask-restful.readthedocs.io/en/0.3.5/)
+- Flask-RESTful (misschien? Kan ook zonder) (https://flask-restful.readthedocs.io/en/0.3.5/)
 - Flask-PyMongo (http://flask-pymongo.readthedocs.io/en/latest/)
 
 # How to install:
@@ -16,4 +16,5 @@ use "venv\Scripts\activate.bat" (Windows) to switch to this application's enviro
 - To run the server, find out what Python file initializes/bootstraps the application and type "python file_name.py". The server will be running on http://127.0.0.1:5000/
 - Download and install MongoDB (https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 - Enable MongoDB authentication (https://docs.mongodb.com/master/tutorial/enable-authentication/)
-- Bekijk deze handige 30 minuten tutorial voor MongoDB (https://www.youtube.com/watch?v=pWbMrx5rVBE)
+- Watch this 30 minute MongoDB tutorial (https://www.youtube.com/watch?v=pWbMrx5rVBE)
+- Go to the website directory. In your command line type: "set FLASK_APP=main" and "set FLASK_DEBUG=true". If you use OSX or Linux, use export instead of set.
