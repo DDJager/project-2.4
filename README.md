@@ -1,8 +1,12 @@
 # Project-2.4
 
+# Extra Documentation
+- [Information about the main application structure](https://github.com/DDJager/project-2.4/blob/master/website/documentation/README-application-structure.md)
+- [Information about the API structure](https://github.com/DDJager/project-2.4/blob/master/website/documentation/README-api.md)
+
 # Libraries used:
-- Flask-RESTful (misschien? Kan ook zonder) (https://flask-restful.readthedocs.io/en/0.3.5/)
-- Flask-PyMongo (http://flask-pymongo.readthedocs.io/en/latest/)
+- (NOT USED) Flask-RESTful (misschien? Kan ook zonder) (https://flask-restful.readthedocs.io/en/0.3.5/)
+- (NOT USED) Flask-PyMongo (http://flask-pymongo.readthedocs.io/en/latest/)
 
 # How to install:
 - Install Python 3+

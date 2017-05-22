@@ -1,5 +1,9 @@
-# from main import app
-#
-# @api.route('/users/')
-# def users():
-#     return 'users';
+from . import api
+
+# # # # # # #
+# DUMMY FILE
+# # # # # # #
+
+@api.route('/users/')
+def users():
+    return 'users';
