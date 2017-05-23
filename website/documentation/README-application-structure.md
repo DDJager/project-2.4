@@ -9,8 +9,8 @@ The folder for your virtual environment. Certain libraries gets installed in thi
 Else it will install the packages globally.
 
 #### (folder) website/api_1_0
-⋅⋅* __init__.py (The bootstrapper for the API, we actually make a Blueprint of this folder/module which gets imported in the main application's __init__.py)
-⋅⋅* comments.py (API and HTTP verbs specifically for the comments)
+* __init__.py (The bootstrapper for the API, we actually make a Blueprint of this folder/module which gets imported in the main application's __init__.py)
+* comments.py (API and HTTP verbs specifically for the comments)
 
 #### (folder) website/static
 This is where all the css and/or javascript files will reside.
