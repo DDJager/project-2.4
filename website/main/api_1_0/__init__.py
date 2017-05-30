@@ -7,4 +7,4 @@ api = Blueprint('api', __name__)
 #     return 'users';
 
 
-from . import users, comments
+from . import users, achievements, profile
