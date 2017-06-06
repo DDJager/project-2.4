@@ -21,3 +21,10 @@ use "venv\Scripts\activate.bat" (Windows) to switch to this application's enviro
 - Download and install MongoDB (https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 - Enable MongoDB authentication (https://docs.mongodb.com/master/tutorial/enable-authentication/)
 - Watch this 30 minute MongoDB tutorial (https://www.youtube.com/watch?v=pWbMrx5rVBE)
+
+# Using migrations
+- Run the command "flask db upgrade"
+If this doesn't work, try deleting the migrations and do the following
+- Run the command "flask db init"
+- Run the command "Flask db migrate -m [message]"
+- Run the command "flask db upgrade"

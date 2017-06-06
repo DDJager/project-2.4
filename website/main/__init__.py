@@ -8,15 +8,20 @@
 #
 # # # # # # # # # # # # #
 
-# Import flask
+# Import flask & Flask Manager
 from flask import Flask
+from flask_script import Manager
+
 app = Flask(__name__)
+manager = Manager(app)
 
 
 # Import Blueprints
 from .api_1_0 import api as api_1_0_blueprint
 app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1-0')
 
-# Import normal files
+# Import models
 import main.models
+
+# Import views (controllers)
 import main.views
