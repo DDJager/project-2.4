@@ -1,21 +1,12 @@
-/**
- * Created by rik on 5/25/17.
- */
-import React, {Component} from 'react';
-import '../../style/header.css';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-class Header extends Component {
-
-
-    render() {
-        return (
-            <div className="header">
-                <nav>
-
-                </nav>
-            </div>
-        );
-    }
-}
+const Header = () => {
+   return (
+       <div className="header">
+           <Link to="/authenticate"><div className="btn">Authenticate</div></Link>
+       </div>
+   )
+};
 
 export default Header;
