@@ -1,12 +1,15 @@
 from flask_sqlalchemy import SQLAlchemy
 from main import app, manager
 from flask_migrate import Migrate, MigrateCommand
+from flask_bcrypt import Bcrypt
+
 
 ## Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/project2-4'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
 ## Migration
 migrate = Migrate(app, db)
@@ -29,11 +32,18 @@ class User(db.Model):
     password = db.Column(db.String(128))
     picture_url = db.Column(db.String(256))
     description = db.Column(db.Text())
-    friends = db.relationship('Friendship', backref='user')
+    # friends = db.relationship('User', backref='user')
 
     # Default return value
     def __repr__(self):
         return '<User %r>' % self.username
+
+    # Helper methods
+    def hash_password(self, password):
+        self.password = bcrypt.generate_password_hash(password)
+
+    def verify_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
 
 
 ## Friendship model
@@ -48,7 +58,7 @@ class Friendship(db.Model):
 
     # Default return value
     def __repr__(self):
-        return '<Role %r>' % self.name
+        return '<Friendship %r>' % self.name
 
 ## Game model
 class Game(db.Model):
@@ -63,7 +73,7 @@ class Game(db.Model):
 
     # Default return value
     def __repr__(self):
-        return '<Role %r>' % self.name
+        return '<Game %r>' % self.name
 
 
 ## Achievement model
@@ -79,4 +89,4 @@ class Achievement(db.Model):
 
     # Default return value
     def __repr__(self):
-        return '<Role %r>' % self.name
+        return '<Achievement %r>' % self.name
