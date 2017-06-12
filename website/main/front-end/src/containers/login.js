@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import formInput from '../components/form-input';
-// import { login } from '../actions/index'
+import { login } from '../actions/index'
 
 class Login extends Component {
 
     onSubmit(values) {
 
         console.log('ok');
-        // this.props.login(values);
+        this.props.login(values);
     }
 
     render() {
@@ -45,7 +46,13 @@ function validate(values) {
     return errors;
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ login }, dispatch);
+}
+
 export default reduxForm({
     validate,
     form:'login'
-})(Login);
+})(connect(
+    null, mapDispatchToProps
+)(Login));

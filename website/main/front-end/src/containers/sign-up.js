@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field} from 'redux-form';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { createAccount } from '../actions/index';
 import formInput from '../components/form-input';
@@ -67,9 +68,13 @@ function validate(values) {
     return errors;
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ createAccount: createAccount() }, dispatch);
+}
+
 export default reduxForm({
     validate,
     form: 'SignUp'
 })(
-    connect(null, {createAccount})(signUp)
+    connect(null, mapDispatchToProps)(signUp)
 );
