@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default profileReducer = ()=> {
+export default function() {
     return ({
         name: 'ikke'
     })

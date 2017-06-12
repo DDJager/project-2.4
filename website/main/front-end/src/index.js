@@ -10,6 +10,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import root from './components/root';
 import authenticate from './components/authenticate';
+import profile from './containers/profile';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -20,6 +21,7 @@ ReactDOM.render(
                 <Header/>
                 <Switch>
                     <Route path="/authenticate" component={authenticate}/>
+                    <Route path="/profile" component={profile}/>
                     <Route path="/" component={root}/>
                 </Switch>
                 <Footer/>

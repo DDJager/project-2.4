@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import SignUp from './sign-up';
-import Login from './login';
+import SignUp from '../containers/sign-up';
+import Login from '../containers/login';
 
 export default class authenticate extends Component {
     constructor() {

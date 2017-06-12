@@ -3,7 +3,7 @@ import { reduxForm, Field} from 'redux-form';
 import { connect } from 'react-redux';
 
 import { createAccount } from '../actions/index';
-import formInput from './form-input';
+import formInput from '../components/form-input';
 
 class signUp extends Component {
     onSubmit(values) {

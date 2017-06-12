@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import formInput from './form-input';
+import formInput from '../components/form-input';
 import { login } from '../actions/index'
 
 class Login extends Component {
