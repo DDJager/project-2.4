@@ -48,5 +48,4 @@ function validate(values) {
 export default reduxForm({
     validate,
     form:'login'
-})(Login
-);
+})(Login);

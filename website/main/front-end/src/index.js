@@ -21,7 +21,7 @@ ReactDOM.render(
                 <Header/>
                 <Switch>
                     <Route path="/authenticate" component={authenticate}/>
-                    <Route path="/profile" component={profile}/>
+                    <Route path="/profile/:id?" component={profile}/>
                     <Route path="/" component={root}/>
                 </Switch>
                 <Footer/>

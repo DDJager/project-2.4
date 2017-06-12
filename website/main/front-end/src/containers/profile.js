@@ -9,7 +9,7 @@ import Achievements from '../components/achievements';
 class Profile extends Component {
     render() {
         return (
-            <div>
+            <div>{this.props.match.params.id}
                 <Id name={this.props.profile.name}/>
                 <MatchHistory/>
                 <Achievements/>
