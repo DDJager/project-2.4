@@ -1,7 +1,9 @@
 from . import api
 from flask import jsonify
+from main.models import auth
 
 @api.route('/achievements/')
+@auth.login_required
 def get_achievements():
     response = jsonify(
         {

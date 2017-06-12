@@ -2,14 +2,20 @@ from flask_sqlalchemy import SQLAlchemy
 from main import app, manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_bcrypt import Bcrypt
+from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
+from flask_httpauth import HTTPBasicAuth
+
+
 
 
 ## Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/project2-4'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = '\x8b;\x98\xf0{\x9f;\xb4\x93\xcd5F\x18\xbe\xf3\xa5D\xe4\x9aB^\xc0v\xe3'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+auth = HTTPBasicAuth()
 
 ## Migration
 migrate = Migrate(app, db)
@@ -44,6 +50,23 @@ class User(db.Model):
 
     def verify_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
+
+    def generate_auth_token(self, expiration = 600):
+        s = Serializer(app.config['SECRET_KEY'], expires_in = expiration)
+        return s.dumps({ 'id': self.id })
+
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except SignatureExpired:
+            return None # valid token, but expired
+        except BadSignature:
+            return None # invalid token
+        user = User.query.get(data['id'])
+        return user
+
 
 
 ## Friendship model

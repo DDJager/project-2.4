@@ -1,5 +1,6 @@
 from . import api
 from flask import jsonify
+from main.models import auth
 
 @api.route('/profile/')
 def get_profile():

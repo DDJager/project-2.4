@@ -1,7 +1,9 @@
 from . import api
 from flask import jsonify
+from main.models import auth
 
 @api.route('/users/')
+@auth.login_required
 def get_users():
     response = jsonify(
         {

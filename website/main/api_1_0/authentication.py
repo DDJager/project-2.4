@@ -1,6 +1,6 @@
 from . import api
-from flask import jsonify, request, abort
-from main.models import db, User
+from flask import jsonify, request, abort, g
+from main.models import db, auth, User
 
 @api.route('/authenticate/', methods=['POST'])
 def authenticate():
@@ -28,3 +28,25 @@ def authenticate():
 
     # @TODO in the future: {'Location': url_for('get_user', id = user.id, _external = True)}
     return jsonify({ 'username': user.username })
+
+
+
+
+@api.route('/token')
+@auth.login_required
+def get_token():
+    token = g.user.generate_auth_token(600)
+    return jsonify({ 'token': token.decode('ascii') })
+
+@auth.verify_password
+def verify_password(username_or_token, password):
+    # First try to authenticate by token
+    user = User.verify_auth_token(username_or_token)
+
+    if not user:
+        # Try to authenticate with username/password
+        user = User.query.filter_by(username = username_or_token).first()
+        if not user or not user.verify_password(password):
+            return False
+    g.user = user
+    return True
