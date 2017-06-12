@@ -3,12 +3,14 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import formInput from '../components/form-input';
-import { login } from '../actions/index'
+// import { login } from '../actions/index'
 
 class Login extends Component {
 
     onSubmit(values) {
-        this.props.login(values)
+
+        console.log('ok');
+        // this.props.login(values);
     }
 
     render() {
@@ -23,7 +25,7 @@ class Login extends Component {
                 <Field
                     label="Password"
                     name="password"
-                    type="text"
+                    type="password"
                     component={formInput}
                 />
                 <div className="btn btn-primary" type="submit">Log in</div>
@@ -46,6 +48,5 @@ function validate(values) {
 export default reduxForm({
     validate,
     form:'login'
-})(
-    connect(null, {login})(Login)
+})(Login
 );

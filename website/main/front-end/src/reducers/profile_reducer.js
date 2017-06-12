@@ -1,6 +1,9 @@
-import React from 'react';
+import { LOGIN } from '../actions/index';
 
-export default function() {
+export default function(state, action) {
+    if (action.type === LOGIN){
+        console.log('goinmg');
+    }
     return ({
         name: 'ikke'
     })

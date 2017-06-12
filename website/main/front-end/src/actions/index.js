@@ -16,9 +16,12 @@ export function createAccount(values) {
 
 export function login(values) {
     const request = axios.post(URL, values);
-
     return {
         type: LOGIN,
         payload: request
     }
+}
+
+export function loadProfile(id) {
+    const request= axios.get(URL)
 }
