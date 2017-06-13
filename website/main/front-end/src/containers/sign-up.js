@@ -39,7 +39,7 @@ class signUp extends Component {
                     type="password"
                     component={formInput}
                 />
-                <div className="btn btn-primary" type="submit">Sign up</div>
+                <button className="btn btn-primary" type="submit">Sign up</button>
             </form>
         );
     }
