@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const URL = `localhost:5000`;
+const URL = `http://localhost:5000/api/v1-0`;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
 export const LOAD_PROFILE = 'loadProfile';
 
 export function createAccount(values) {
-    const target = `${URL}/api/v1/register`;
+    const target = `${URL}/authenticate/`;
     const request = axios.post(target, values);
 
     return {
@@ -17,8 +17,14 @@ export function createAccount(values) {
 }
 
 export function login(values) {
-    const target = `${URL}/api/v1/login`;
-    const request = axios.post(target, values);
+    const target = `${URL}/token`;
+    const headers = {
+        auth: {
+            username: values.username,
+            password: values.password
+        }
+    };
+    const request = axios.get(target, headers).then((response)=>{return response.data.token});
     return {
         type: LOGIN,
         payload: request
@@ -26,7 +32,7 @@ export function login(values) {
 }
 
 export function loadProfile(id) {
-    const target = `${URL}/api/v1/user/${id}/profile`;
+    const target = `${URL}/user/${id}/profile`;
     const request= axios.get(target);
 
     return {

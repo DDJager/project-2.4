@@ -22,8 +22,8 @@ class signUp extends Component {
                     component={formInput}
                 />
                 <Field
-                    label="email"
-                    name="email"
+                    label="Description"
+                    name="description"
                     type="text"
                     component={formInput}
                 />
@@ -53,8 +53,8 @@ function validate(values) {
     if (!values.username){
         errors.username = "Enter an username";
     }
-    if (!values.email){
-        errors.email = "Enter an email";
+    if (!values.description){
+        errors.description = "Add a description of yourself";
     }
     if (!values.password){
         errors.password = "Enter a password";

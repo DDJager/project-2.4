@@ -10,7 +10,7 @@ class Login extends Component {
 
     onSubmit(values) {
 
-        console.log('ok');
+        console.log(values);
         this.props.login(values);
     }
 
