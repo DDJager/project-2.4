@@ -15,7 +15,7 @@ class signUp extends Component {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
                 <Field
-                    label="username"
+                    label="Username"
                     name="username"
                     type="text"
                     component={formInput}
@@ -27,13 +27,13 @@ class signUp extends Component {
                     component={formInput}
                 />
                 <Field
-                    label="password"
+                    label="Password"
                     name="password"
                     type="password"
                     component={formInput}
                 />
                 <Field
-                    label="password confirmation"
+                    label="Password confirmation"
                     name="passwordConfirmation"
                     type="password"
                     component={formInput}

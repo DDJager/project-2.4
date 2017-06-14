@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const URL = `http://localhost:5000/api/v1-0`;
-let token = null;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
@@ -10,7 +9,6 @@ export const LOAD_PROFILE = 'loadProfile';
 export function createAccount(values) {
     const target = `${URL}/authenticate/`;
     const request = axios.post(target, values);
-
     return {
         type: CREATE_ACCOUNT,
         payload: request

@@ -5,7 +5,6 @@ export default function (state = {}, action) {
     switch (action.type) {
         case LOGIN:
             if (action.payload.status){
-                console.log(action);
                 return {
                     name: action.name,
                     token: action.payload.data.token
