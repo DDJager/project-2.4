@@ -8,7 +8,6 @@ import formInput from '../components/form-input';
 
 class signUp extends Component {
     onSubmit(values) {
-        console.log(values);
         this.props.createAccount(values);
     }
 

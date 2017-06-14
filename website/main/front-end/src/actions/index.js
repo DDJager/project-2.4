@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const URL = `http://localhost:5000/api/v1-0`;
+let token = null;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
@@ -24,7 +25,7 @@ export function login(values) {
             password: values.password
         }
     };
-    const request = axios.get(target, headers).then((response)=>{return response.data.token});
+    const request = axios.get(target, headers);
     return {
         type: LOGIN,
         payload: request

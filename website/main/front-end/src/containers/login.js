@@ -9,8 +9,6 @@ import { login } from '../actions/index'
 class Login extends Component {
 
     onSubmit(values) {
-
-        console.log(values);
         this.props.login(values);
     }
 
