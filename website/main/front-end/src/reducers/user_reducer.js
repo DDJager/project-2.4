@@ -1,11 +1,11 @@
 import { LOGIN } from '../actions/index';
 
-export default function (state = null, action) {
+export default function (state = {}, action) {
 
     switch (action.type) {
         case LOGIN:
             if (action.payload.status){
-                console.log(action.payload.data.token);
+                console.log(action);
                 return {
                     name: action.name,
                     token: action.payload.data.token

@@ -68,7 +68,7 @@ function validate(values) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ createAccount: createAccount() }, dispatch);
+    return bindActionCreators({ createAccount: createAccount }, dispatch);
 }
 
 export default reduxForm({
