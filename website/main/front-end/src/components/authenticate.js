@@ -26,9 +26,6 @@ export default class authenticate extends Component {
                 <button onClick={()=>this.toSignUp()}>Register</button>
                 {this.state.screen}
             </div>
-
         );
     }
 }
-
- // authenticate;
