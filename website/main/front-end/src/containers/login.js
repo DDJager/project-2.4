@@ -17,9 +17,15 @@ class Login extends Component {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
                 {/*
-                    *Redirects the user to the home page if they are logged in
+                    * Redirects the user to the home page if they are logged in.
+                    * If a login attempt has failed displays an error
                 */}
-                {this.props.user.token ? <Redirect to='/'/> : ''}
+                {this.props.user.status ?
+                    this.props.status === 'successful' ?
+                        <Redirect to='/'/>
+                        : 'Credentials are incorrect'
+                    : ''}
+
                 <Field
                     label="Username"
                     name="username"

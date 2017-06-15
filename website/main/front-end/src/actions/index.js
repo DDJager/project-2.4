@@ -6,9 +6,11 @@ export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
 export const LOAD_PROFILE = 'loadProfile';
 
-export function createAccount(values) {
+export function createAccount(values, success, failed) {
     const target = `${URL}/authenticate/`;
-    const request = axios.post(target, values);
+    const request = axios.post(target, values)
+        .then((response)=>success())
+        .catch(()=>failed());
     return {
         type: CREATE_ACCOUNT,
         payload: request
