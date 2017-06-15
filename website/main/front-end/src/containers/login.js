@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 import formInput from '../components/form-input';
 import { login } from '../actions/index'
@@ -15,6 +16,9 @@ class Login extends Component {
     render() {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+                {this.props.user.token ?
+                    <Redirect to='/'/> : ''
+                }
                 <Field
                     label="Username"
                     name="username"
