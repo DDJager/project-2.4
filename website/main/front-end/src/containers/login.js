@@ -16,9 +16,10 @@ class Login extends Component {
     render() {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-                {this.props.user.token ?
-                    <Redirect to='/'/> : ''
-                }
+                {/*
+                    *Redirects the user to the home page if they are logged in
+                */}
+                {this.props.user.token ? <Redirect to='/'/> : ''}
                 <Field
                     label="Username"
                     name="username"

@@ -7,10 +7,13 @@ export default function (state = {}, action) {
             if (action.payload.status){
                 return {
                     name: action.name,
-                    token: action.payload.data.token
+                    token: action.payload.data.token,
+                    status: 'successful'
                 };
             }else {
-                //TODO handle authentication rejection
+                return {
+                    status: 'failed'
+                }
             }
 
         default:
