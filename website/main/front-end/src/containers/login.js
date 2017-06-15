@@ -13,18 +13,27 @@ class Login extends Component {
         this.props.login(values);
     }
 
+    /*
+     * Redirects the user to the home page if they are logged in.
+     * If a login attempt has failed displays an error
+     */
+    statusCheck() {
+        const { status } = this.props.user;
+        if (status) {
+            if (status === 'successful') {
+                return <Redirect to='/'/>;
+            }else {
+                return 'Credentials are incorrect';
+            }
+        }else {
+            return '';
+        }
+    }
+
     render() {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-                {/*
-                    * Redirects the user to the home page if they are logged in.
-                    * If a login attempt has failed displays an error
-                */}
-                {this.props.user.status ?
-                    this.props.status === 'successful' ?
-                        <Redirect to='/'/>
-                        : 'Credentials are incorrect'
-                    : ''}
+                {this.statusCheck()}
 
                 <Field
                     label="Username"
