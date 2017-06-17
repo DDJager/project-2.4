@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import Achievement from './achievement';
-
 class Achievements extends Component {
     constructor(props) {
         super(props);
@@ -22,41 +20,47 @@ class Achievements extends Component {
         );
     }
 
-    option(game) {
-
-    }
-
     onChangeHandle(game) {
         this.setState({
             selectedGame: game.target.value
         });
     }
 
+// TODO get info about the owned achievements
     achievementList() {
-        const selected = this.state.selectedGame;console.log(this.props.games);
-        return _.map(this.props.games, (game) => {console.log('game:', selected);
+        const selected = this.state.selectedGame;
+        return _.map(this.props.games, (game) => {
             if (game.id == selected) {
-                return game.achievements.map((achievement)=>{
-                    return achievement.name;
-                })
+                return game.achievements.map(this.achievement)
             }
         })
+    }
+
+    achievement(achieve) {
+        return (
+            <div className="achievement">
+                <h4>{achieve.name}</h4><br/>
+                {achieve.description}
+            </div>
+        )
     }
 
     render() {
         return (
             <div>
-
                 <h3>Achievements</h3>
                 <select
                     onChange={this.onChangeHandle}
-                    value={this.state.selectedGame}
-                ><option defaultValue> -- select a game -- </option>
+                    value={this.state.selectedGame}>
+
+                    <option defaultValue> -- select a game -- </option>
                     {this.dropdownOptions()}
+
                 </select>
+
+                {/*list of all achievements belonging to the selected game*/}
                 { this.achievementList() }
-                <Achievement name="ak" image="favicon.ico"/>
-                {/*list of all owned achievements*/}
+
             </div>
         );
     }
