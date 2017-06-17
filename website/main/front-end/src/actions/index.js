@@ -6,6 +6,7 @@ export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
 export const LOAD_PROFILE = 'loadProfile';
 export const GAMES = 'games';
+export const PLAYERS = 'users';
 
 export function createAccount(values) {
     const target = `${URL}/authenticate/`;
@@ -51,6 +52,20 @@ export function loadGames(token) {
     const request = axios.get(target, headers);
     return {
         type: GAMES,
+        payload: request
+    }
+}
+
+export function loadUsers(token) {
+    const target = `${URL}/users/`;
+    const headers = {
+        auth: {
+            username: token
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: PLAYERS,
         payload: request
     }
 }

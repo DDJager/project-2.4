@@ -11,6 +11,7 @@ import Footer from './components/footer';
 import root from './components/root';
 import authenticate from './components/authenticate';
 import profile from './containers/profile';
+import players from './containers/players';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -22,6 +23,7 @@ ReactDOM.render(
                 <Switch>
                     <Route path="/authenticate" component={authenticate}/>
                     <Route path="/profile/:id?" component={profile}/>
+                    <Route path="/players" component={players}/>
                     <Route path="/" component={root}/>
                 </Switch>
                 <Footer/>
