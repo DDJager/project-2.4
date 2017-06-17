@@ -9,6 +9,7 @@ class Header extends Component {
                 <Link to="/"><div className="btn">Home</div></Link>
 
                 <Link to="/profile"><div className="btn">Profile</div></Link>
+                <Link to="/players"><div className="btn">players</div></Link>
                 <span>{this.props.user.token ? this.props.user.token : <Link to="/authenticate"><div className="btn">Authenticate</div></Link>}</span>
             </div>
         )
