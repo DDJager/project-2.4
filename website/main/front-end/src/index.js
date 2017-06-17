@@ -22,7 +22,7 @@ ReactDOM.render(
                 <Header/>
                 <Switch>
                     <Route path="/authenticate" component={authenticate}/>
-                    <Route path="/profile/:id?" component={profile}/>
+                    <Route path="/profile/:username?" component={profile}/>
                     <Route path="/players" component={players}/>
                     <Route path="/" component={root}/>
                 </Switch>

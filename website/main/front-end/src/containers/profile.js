@@ -16,10 +16,19 @@ class Profile extends Component {
         }
     }
 
+    user() {
+        if (this.props.match.params.username){
+            return this.props.match.params.username;
+        }else{
+            return this.props.user;
+        }
+
+    }
+
     render() {
         return (
-            <div>{this.props.match.params.id}
-                <Id name={this.props.profile.name}/>
+            <div>{this.props.match.params.username}
+                <Id user={this.user()}/>
                 <MatchHistory/>
                 <Achievements games={this.props.games}/>
             </div>
@@ -31,7 +40,8 @@ function mapStateToProps(state) {
     return {
         profile: state.profile,
         user: state.user,
-        games: state.games
+        games: state.games,
+        players: state.players
     };
 }
 
