@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
+
 import { loadUsers } from '../actions/index';
 
 class players extends Component {
@@ -12,8 +14,9 @@ class players extends Component {
         if (this.props.players.list) {
             return (
                 this.props.players.list.map((player) => {
+                    const target = `/profile/${player.username}`;
                     return (
-                        <li key={player.username}>{player.username}</li>
+                        <li key={player.username}><Link to={target}>{player.username}</Link></li>
                     )
                 })
             )
@@ -29,8 +32,7 @@ class players extends Component {
                     {this.userList()}
                 </ul>
             </div>
-            )
-
+        )
     }
 }
 
