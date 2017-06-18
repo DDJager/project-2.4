@@ -26,6 +26,7 @@ def get_games():
             })
 
         data.append({
+            'id': game.id,
             'name': game.name,
             'description': game.description,
             'achievements': achievements

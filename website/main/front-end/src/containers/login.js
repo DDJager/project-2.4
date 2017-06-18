@@ -9,8 +9,6 @@ import { login } from '../actions/index'
 class Login extends Component {
 
     onSubmit(values) {
-
-        console.log('ok');
         this.props.login(values);
     }
 
@@ -50,9 +48,15 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ login }, dispatch);
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
 export default reduxForm({
     validate,
     form:'login'
 })(connect(
-    null, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps
 )(Login));

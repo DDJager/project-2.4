@@ -36,7 +36,15 @@ def authenticate():
 @auth.login_required
 def get_token():
     token = g.user.generate_auth_token(600)
-    return jsonify({ 'token': token.decode('ascii') })
+    return jsonify({
+        'token': token.decode('ascii'),
+        'user': {
+            'id': g.user.id,
+            'username': g.user.username,
+            'picture_url': g.user.picture_url,
+            'description': g.user.description
+        }
+    })
 
 @auth.verify_password
 def verify_password(username_or_token, password):
