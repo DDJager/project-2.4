@@ -38,6 +38,8 @@ class User(db.Model):
     password = db.Column(db.String(128))
     picture_url = db.Column(db.String(256))
     description = db.Column(db.Text())
+    ranking = db.Column(db.Integer, default=1)
+
     # friends = db.relationship('User', backref='user')
 
     # Default return value

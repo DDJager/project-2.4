@@ -3,6 +3,7 @@ from flask import jsonify
 from main.models import auth, Achievement, Game
 
 @api.route('/achievements/')
+@api.route('/achievements')
 @auth.login_required
 def get_achievements():
 
