@@ -49,7 +49,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <div>{this.props.match.params.username}
+            <div>
                 <Id user={this.user()}/>
                 <MatchHistory/>
                 <Achievements games={this.props.games}/>

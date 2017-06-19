@@ -10,7 +10,7 @@ export default function (state = {}, action) {
                     token: data.token,
                     username: data.user.username,
                     picture_url: data.user.picture_url,
-                    description: data.user.description
+                    description: data.user.description,
                     status: 'successful'
                 };
             }else {
