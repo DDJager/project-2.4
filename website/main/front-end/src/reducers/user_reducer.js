@@ -11,9 +11,12 @@ export default function (state = {}, action) {
                     username: data.user.username,
                     picture_url: data.user.picture_url,
                     description: data.user.description
+                    status: 'successful'
                 };
             }else {
-                //TODO handle authentication rejection
+                return {
+                    status: 'failed'
+                }
             }
 
         default:

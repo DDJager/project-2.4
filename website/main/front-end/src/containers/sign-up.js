@@ -7,13 +7,35 @@ import { createAccount } from '../actions/index';
 import formInput from '../components/form-input';
 
 class signUp extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: ''
+        }
+    }
+
     onSubmit(values) {
-        this.props.createAccount(values);
+        this.props.createAccount(values, ()=>{
+            this.successful();
+        },
+            this.failed()
+            );
+    }
+
+    successful() {
+        this.props.toLogin();
+    }
+
+    failed() {
+        this.setState({
+            status: 'This account already exists'
+        });
     }
 
     render() {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+                {this.state.status}
                 <Field
                     label="Username"
                     name="username"
