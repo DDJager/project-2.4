@@ -9,7 +9,7 @@ from flask_httpauth import HTTPBasicAuth
 
 
 ## Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/project2-4'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:welkom@localhost/project'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '\x8b;\x98\xf0{\x9f;\xb4\x93\xcd5F\x18\xbe\xf3\xa5D\xe4\x9aB^\xc0v\xe3'
@@ -38,6 +38,8 @@ class User(db.Model):
     password = db.Column(db.String(128))
     picture_url = db.Column(db.String(256))
     description = db.Column(db.Text())
+    ranking = db.Column(db.Integer, default=1)
+
     # friends = db.relationship('User', backref='user')
 
     # Default return value

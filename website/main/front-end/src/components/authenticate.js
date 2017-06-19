@@ -7,8 +7,9 @@ export default class authenticate extends Component {
     constructor() {
         super();
         this.state = {
-            screen:<Login/>
-        }
+            screen:<Login toLogin={this.toLogin}/>
+        };
+        this.toLogin = this.toLogin.bind(this);
     }
 
     toLogin() {
@@ -16,7 +17,7 @@ export default class authenticate extends Component {
     }
 
     toSignUp() {
-        this.setState({screen:<SignUp/>})
+        this.setState({screen:<SignUp toLogin={this.toLogin}/>})
     }
 
     render() {
@@ -26,9 +27,6 @@ export default class authenticate extends Component {
                 <button onClick={()=>this.toSignUp()}>Register</button>
                 {this.state.screen}
             </div>
-
         );
     }
 }
-
- // authenticate;

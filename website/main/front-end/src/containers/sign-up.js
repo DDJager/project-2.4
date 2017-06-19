@@ -7,34 +7,55 @@ import { createAccount } from '../actions/index';
 import formInput from '../components/form-input';
 
 class signUp extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: ''
+        }
+    }
+
     onSubmit(values) {
-        console.log(values);
-        this.props.createAccount(values);
+        this.props.createAccount(values, ()=>{
+            this.successful();
+        },
+            this.failed()
+            );
+    }
+
+    successful() {
+        this.props.toLogin();
+    }
+
+    failed() {
+        this.setState({
+            status: 'This account already exists'
+        });
     }
 
     render() {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+                {this.state.status}
                 <Field
-                    label="username"
+                    label="Username"
                     name="username"
                     type="text"
                     component={formInput}
                 />
                 <Field
-                    label="email"
-                    name="email"
+                    label="Description"
+                    name="description"
                     type="text"
                     component={formInput}
                 />
                 <Field
-                    label="password"
+                    label="Password"
                     name="password"
                     type="password"
                     component={formInput}
                 />
                 <Field
-                    label="password confirmation"
+                    label="Password confirmation"
                     name="passwordConfirmation"
                     type="password"
                     component={formInput}
@@ -53,8 +74,8 @@ function validate(values) {
     if (!values.username){
         errors.username = "Enter an username";
     }
-    if (!values.email){
-        errors.email = "Enter an email";
+    if (!values.description){
+        errors.description = "Add a description of yourself";
     }
     if (!values.password){
         errors.password = "Enter a password";
@@ -69,7 +90,7 @@ function validate(values) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ createAccount: createAccount() }, dispatch);
+    return bindActionCreators({ createAccount: createAccount }, dispatch);
 }
 
 export default reduxForm({
