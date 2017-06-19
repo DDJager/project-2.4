@@ -7,8 +7,11 @@ class Id extends Component {
     render() {
         return(
             <div>
-                <img src={this.props.image} alt={this.props.name}/>
-                <h1>{this.props.name}</h1>
+                <img src={`http://${this.props.user.picture_url}`} alt={this.props.user.username}/>
+                <h1>{this.props.user.username}</h1>
+                <p>
+                    {this.props.user.description}
+                </p>
             </div>
         )
     }
