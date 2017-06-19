@@ -20,7 +20,7 @@ class Login extends Component {
     statusCheck() {
         const { status } = this.props.user;
         if (status) {
-            if (status === 'successful') {
+            if (localStorage.getItem("token")) {
                 return <Redirect to='/'/>;
             }else {
                 return 'Credentials are incorrect';

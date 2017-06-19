@@ -7,6 +7,7 @@ export const LOGIN = 'login';
 export const LOAD_PROFILE = 'loadProfile';
 export const GAMES = 'games';
 export const PLAYERS = 'users';
+export const AUTH_CHECK = 'authCheck';
 
 export function createAccount(values, success, failed) {
     const target = `${URL}/authenticate/`;
@@ -44,11 +45,11 @@ export function loadProfile(id) {
     }
 }
 
-export function loadGames(token) {
+export function loadGames() {
     const target = `${URL}/games/`;
     const headers = {
         auth: {
-            username: token
+            username: localStorage.getItem("token")
         }
     };
     const request = axios.get(target, headers);
@@ -58,16 +59,37 @@ export function loadGames(token) {
     }
 }
 
-export function loadUsers(token) {
+export function loadUsers() {
     const target = `${URL}/users/`;
     const headers = {
         auth: {
-            username: token
+            username: localStorage.getItem("token")
         }
     };
     const request = axios.get(target, headers);
     return {
         type: PLAYERS,
+        payload: request
+    }
+}
+
+export function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("picture_url");
+    localStorage.removeItem("description");
+}
+
+export function checkLogin() {
+    const target = `${URL}/token`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: AUTH_CHECK,
         payload: request
     }
 }
