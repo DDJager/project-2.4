@@ -73,13 +73,6 @@ export function loadUsers() {
     }
 }
 
-export function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("picture_url");
-    localStorage.removeItem("description");
-}
-
 export function checkLogin() {
     const target = `${URL}/token`;
     const headers = {

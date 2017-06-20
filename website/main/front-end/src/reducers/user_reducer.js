@@ -1,4 +1,4 @@
-import { LOGIN } from '../actions/index';
+import { LOGIN, AUTH_CHECK } from '../actions/index';
 
 export default function (state = {}, action) {
 
@@ -18,12 +18,17 @@ export default function (state = {}, action) {
                     description: data.user.description,
                     status: 'successful'
                 };
-            }else {console.log(action)
+            }else {
                 return {
                     status: 'failed'
                 }
             }
+            break;
+        case AUTH_CHECK:
+            if (action.payload.status){
 
+            }
+            break;
         default:
             return state;
     }

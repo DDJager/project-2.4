@@ -6,27 +6,25 @@ import { bindActionCreators } from 'redux';
 import { checkLogin } from '../actions/index';
 
 class Header extends Component {
-    constructor() {
-        super();
-        this.state = {
-            token: localStorage.getItem("token")
-        }
+
+    componentDidMount() {
+        this.props.checkLogin();
     }
 
     logout() {
-        // if (localStorage.getItem("token")) {
+        if (localStorage.getItem("token")) {
             return (
-                <button onClick={()=>{
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("username");
-                    localStorage.removeItem("picture_url");
-                    localStorage.removeItem("description");
-                    this.setState({token: localStorage.getItem("token")});
-                }
-
+                <button onClick={
+                    ()=>{
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("username");
+                        localStorage.removeItem("picture_url");
+                        localStorage.removeItem("description");
+                        this.forceUpdate();
+                    }
                 }>Logout</button>
             )
-        // }
+        }
     }
 
     user() {
@@ -53,7 +51,7 @@ class Header extends Component {
                 <Link to="/games"><div className="btn">games</div></Link>
                 {this.authenticate()}
                 {this.user()}
-                {localStorage.getItem("token") ? this.logout() : ''}
+                {this.logout()}
             </div>
         )
     }
