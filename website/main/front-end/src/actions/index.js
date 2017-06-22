@@ -8,6 +8,7 @@ export const LOAD_PROFILE = 'loadProfile';
 export const GAMES = 'games';
 export const PLAYERS = 'users';
 export const AUTH_CHECK = 'authCheck';
+export const LOGOUT = 'logout';
 
 export function createAccount(values, success, failed) {
     const target = `${URL}/authenticate/`;
@@ -84,5 +85,15 @@ export function checkLogin() {
     return {
         type: AUTH_CHECK,
         payload: request
+    }
+}
+
+export function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("picture_url");
+    localStorage.removeItem("description");
+    return {
+        type: LOGOUT
     }
 }

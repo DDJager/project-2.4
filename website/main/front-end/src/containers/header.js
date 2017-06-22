@@ -3,35 +3,24 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { checkLogin } from '../actions/index';
+import { checkLogin, logout } from '../actions/index';
 
 class Header extends Component {
-
-    componentDidMount() {
-        this.props.checkLogin();
-    }
 
     logout() {
         if (localStorage.getItem("token")) {
             return (
-                <button onClick={
-                    ()=>{
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("username");
-                        localStorage.removeItem("picture_url");
-                        localStorage.removeItem("description");
-                        this.forceUpdate();
-                    }
-                }>Logout</button>
+                <button
+                    onClick={this.props.logout}
+                >Logout</button>
             )
         }
     }
 
     user() {
         if (localStorage.getItem("token")) {
-            return (
-            localStorage.getItem("username")
-        )}
+            return localStorage.getItem("username")
+        }
     }
 
     authenticate() {
@@ -57,14 +46,18 @@ class Header extends Component {
     }
 }
 
+/*
+* User is only imported to let this component re-render
+* once change happens to the login status
+ */
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user:state.user
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({checkLogin}, dispatch)
+    return bindActionCreators({checkLogin, logout}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
