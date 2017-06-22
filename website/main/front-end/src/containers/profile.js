@@ -16,12 +16,12 @@ class Profile extends Component {
     componentDidMount() {
 
         //Check if there is a user logged in
-        if (this.props.user.token) {
-            this.props.loadGames(this.props.user.token);
+        if (localStorage.getItem("token")) {
+            this.props.loadGames();
 
             //Check if a not logged in users info is requested
             if (this.props.match.params.username){
-                this.props.loadUsers(this.props.user.token);
+                this.props.loadUsers();
             }
         }
     }
@@ -42,7 +42,11 @@ class Profile extends Component {
                 }
             }
         }else{
-            return this.props.user;
+            return {
+                username: localStorage.getItem("username"),
+                picture_url: localStorage.getItem("picture_url"),
+                description: localStorage.getItem("description")
+            };
         }
 
     }
@@ -60,8 +64,6 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
     return {
-        profile: state.profile,
-        user: state.user,
         games: state.games,
         players: state.players
     };

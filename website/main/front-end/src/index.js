@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 
 import reducers from './reducers/index';
 import Header from './containers/header';
+import LoginLogic from './containers/login_logic';
 import Footer from './components/footer';
 import root from './components/root';
 import authenticate from './components/authenticate';
@@ -21,6 +22,7 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
             <div>
+                <LoginLogic/>
                 <Header/>
                 <Switch>
                     <Route path="/authenticate" component={authenticate}/>
