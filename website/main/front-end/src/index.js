@@ -23,6 +23,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <LoginLogic/>
+                <Header/>
                 <Switch>
                     <Route path="/authenticate" component={authenticate}/>
                     <Route path="/profile/:username?" component={profile}/>

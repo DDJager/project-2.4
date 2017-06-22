@@ -22,7 +22,7 @@ class LoginLogic extends Component {
 
     render() {
         return (
-            <Header/>
+            <div></div>
         )
     }
 }
