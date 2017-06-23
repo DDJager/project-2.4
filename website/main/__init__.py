@@ -11,10 +11,12 @@
 # Import flask & Flask Manager
 from flask import Flask
 from flask_script import Manager
+from flask_pymongo import PyMongo
+
 
 app = Flask(__name__)
 manager = Manager(app)
-
+mongo = PyMongo(app)
 
 # Import Blueprints
 from .api_1_0 import api as api_1_0_blueprint

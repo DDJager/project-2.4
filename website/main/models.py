@@ -115,3 +115,17 @@ class Achievement(db.Model):
     # Default return value
     def __repr__(self):
         return '<Achievement %r>' % self.name
+
+
+class AchievementUser(db.Model):
+    # Table name
+    __tablename__ = 'achievements_users'
+
+    # Columns
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    achievement_id = db.Column(db.Integer, db.ForeignKey('achievements.id'))
+
+    # Default return value
+    def __repr__(self):
+        return '<AchievementUser %r>' % self.id
