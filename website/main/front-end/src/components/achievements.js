@@ -11,8 +11,17 @@ class Achievements extends Component {
     }
 
     dropdownOptions() {
+        const games = {};
+        _.map(this.props.achievements[this.props.userId], (achievement)=>{
+            const game = achievement.game;
+            games[game.id] = {
+                id: game.id,
+                name: game.name
+            }
+        });
+
         return (
-            _.map(this.props.games, (game)=> {
+            _.map(games, (game)=> {
                 return (
                     <option key={game.id} value={game.id}>{game.name}</option>
                 )
@@ -29,9 +38,9 @@ class Achievements extends Component {
 // TODO get info about the owned achievements
     achievementList() {
         const selected = this.state.selectedGame;
-        return _.map(this.props.games, (game) => {
-            if (game.id == selected) {
-                return game.achievements.map(this.achievement)
+        return _.map(this.props.achievements[this.props.userId], (achieve) => {
+            if (achieve.game.id == selected) {
+                return this.achievement(achieve);
             }
         })
     }

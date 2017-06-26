@@ -9,6 +9,7 @@ export const GAMES = 'games';
 export const PLAYERS = 'users';
 export const AUTH_CHECK = 'authCheck';
 export const LOGOUT = 'logout';
+export const ACHIEVEMENTS = ' achievements';
 
 export function createAccount(values, success, failed) {
     const target = `${URL}/authenticate/`;
@@ -90,10 +91,25 @@ export function checkLogin() {
 
 export function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
     localStorage.removeItem("username");
     localStorage.removeItem("picture_url");
     localStorage.removeItem("description");
     return {
         type: LOGOUT
+    }
+}
+
+export function loadAchievements(id) {
+    const target = `${URL}/achievements/${id}`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: ACHIEVEMENTS,
+        payload: request
     }
 }

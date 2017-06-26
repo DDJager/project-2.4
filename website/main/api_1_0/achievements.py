@@ -62,7 +62,8 @@ def get_achievements_where_user_id_is(user_id):
 
     return jsonify({
         'status': 'success',
-        'achievements': achievements
+        'achievements': achievements,
+        'id': user_id
     }), 200
 
 
@@ -75,7 +76,8 @@ def get_achievements():
 
     return jsonify({
         'status': 'success',
-        'achievements': achievements
+        'achievements': achievements,
+        'id': g.user.id
     }), 200
     # # SELECT * FROM users
     # achievements = Achievement.query.all()

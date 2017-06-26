@@ -7,6 +7,7 @@ export default function (state = {}, action) {
             if (action.payload.status){
                 const data = action.payload.data;
                 localStorage.setItem("token", data.token);
+                localStorage.setItem("id", data.user.id);
                 localStorage.setItem("username", data.user.username);
                 localStorage.setItem("picture_url", data.user.picture_url);
                 localStorage.setItem("description", data.user.description);
@@ -28,6 +29,7 @@ export default function (state = {}, action) {
             if (action.payload.status){
                 const data = action.payload.data;
                 localStorage.setItem("token", data.token);
+                localStorage.setItem("id", data.user.id);
                 localStorage.setItem("username", data.user.username);
                 localStorage.setItem("picture_url", data.user.picture_url);
                 localStorage.setItem("description", data.user.description);
