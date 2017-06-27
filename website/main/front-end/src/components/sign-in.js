@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import SignUp from '../containers/sign-up';
 import Login from '../containers/login';
 
-export default class authenticate extends Component {
+export default class login extends Component {
     constructor() {
         super();
         this.state = {
@@ -23,7 +23,7 @@ export default class authenticate extends Component {
     render() {
         return (
             <div>
-                <button onClick={()=>this.toLogin()}>Login</button>
+                <button onClick={()=>this.toLogin()}>Sign in</button>
                 <button onClick={()=>this.toSignUp()}>Register</button>
                 {this.state.screen}
             </div>

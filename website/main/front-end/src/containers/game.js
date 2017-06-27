@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { loadGames } from '../actions/index';
 
@@ -35,9 +36,20 @@ class Game extends Component {
         });
     }
 
+    loggedIn() {
+      if (!localStorage.getItem("token")) {
+        return <Redirect to='/login'/>;
+      }
+    }
+
     render() {
         const game = this.getGame();
-        if (!game) return <h1>Loading...</h1>;
+        if (!game) return (
+          <div>
+          {this.loggedIn()}
+          <h1>Loading...</h1>;
+          </div>
+      )
         return (
             <div>
                 <h1>{game.name}</h1>

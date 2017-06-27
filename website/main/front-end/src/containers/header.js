@@ -7,43 +7,38 @@ import { checkLogin, logout } from '../actions/index';
 
 class Header extends Component {
 
-    logout() {
-        if (localStorage.getItem("token")) {
-            return (
-                <button
-                    onClick={this.props.logout}
-                >Logout</button>
-            )
-        }
-    }
-
-    user() {
-        if (localStorage.getItem("token")) {
-            return localStorage.getItem("username")
-        }
-    }
-
-    authenticate() {
-        if (!localStorage.getItem("token")) {
-            return (
-                <Link to="/authenticate"><div className="btn">Authenticate</div></Link>
-            )
-        }
+    loggedIn() {
+      if(localStorage.getItem("token")) {
+        const username = localStorage.getItem("username");
+        const profileLink = "/profile/" + username;
+        return (
+          <div>
+          <Link to="/"><div className="btn">Home</div></Link>
+          <Link to={profileLink}><div className="btn">Profile</div></Link>
+          <Link to="/players"><div className="btn">Players</div></Link>
+          <Link to="/games"><div className="btn">Games</div></Link>
+          {username}
+          <button onClick={this.props.logout}>Logout</button>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+          <Link to="/"><div className="btn">Home</div></Link>
+          <Link to="/login"><div className="btn">Sign in</div></Link>
+          </div>
+        )
+      }
     }
 
     render() {
-        return (
-            <div className="header">
-                <Link to="/"><div className="btn">Home</div></Link>
-                <Link to="/profile"><div className="btn">Profile</div></Link>
-                <Link to="/players"><div className="btn">players</div></Link>
-                <Link to="/games"><div className="btn">games</div></Link>
-                {this.authenticate()}
-                {this.user()}
-                {this.logout()}
-            </div>
-        )
+      return(
+        <div className="header">
+        {this.loggedIn()}
+        </div>
+      )
     }
+
 }
 
 /*

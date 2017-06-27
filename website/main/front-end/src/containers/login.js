@@ -30,8 +30,16 @@ class Login extends Component {
         }
     }
 
+    loggedIn() {
+      if (localStorage.getItem("token")) {
+        return <Redirect to='/'/>;
+      }
+    }
+
     render() {
         return (
+          <div>
+          {this.loggedIn()}
             <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
                 {this.statusCheck()}
 
@@ -47,8 +55,9 @@ class Login extends Component {
                     type="password"
                     component={formInput}
                 />
-                <button className="btn btn-primary" type="submit">Log in</button>
+                <button className="btn btn-primary" type="submit">Sign in</button>
             </form>
+            </div>
         );
     }
 }

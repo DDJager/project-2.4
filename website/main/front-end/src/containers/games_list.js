@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { loadGames } from '../actions/index';
 
@@ -18,9 +19,16 @@ class GamesList extends Component {
         });
     }
 
+    loggedIn() {
+      if (!localStorage.getItem("token")) {
+        return <Redirect to='/login'/>;
+      }
+    }
+
     render() {
         return (
             <div>
+                {this.loggedIn()}
                 <ul>
                     {this.games()}
                 </ul>

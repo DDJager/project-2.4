@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
+import { Redirect } from 'react-router-dom';
 
 import { loadGames, loadUsers } from '../actions/index';
 import Id from '../components/profile_user';
@@ -51,9 +52,16 @@ class Profile extends Component {
 
     }
 
+    loggedIn() {
+      if (!localStorage.getItem("token")) {
+        return <Redirect to='/login'/>;
+      }
+    }
+
     render() {
         return (
             <div>
+                {this.loggedIn()}
                 <Id user={this.user()}/>
                 <MatchHistory/>
                 <Achievements games={this.props.games}/>
