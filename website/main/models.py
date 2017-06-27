@@ -38,6 +38,8 @@ class User(db.Model):
     password = db.Column(db.String(128))
     picture_url = db.Column(db.String(256))
     description = db.Column(db.Text())
+    ranking = db.Column(db.Integer, default=1)
+
     # friends = db.relationship('User', backref='user')
 
     # Default return value
@@ -113,3 +115,17 @@ class Achievement(db.Model):
     # Default return value
     def __repr__(self):
         return '<Achievement %r>' % self.name
+
+
+class AchievementUser(db.Model):
+    # Table name
+    __tablename__ = 'achievements_users'
+
+    # Columns
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    achievement_id = db.Column(db.Integer, db.ForeignKey('achievements.id'))
+
+    # Default return value
+    def __repr__(self):
+        return '<AchievementUser %r>' % self.id

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
 
-import { loadGames, loadUsers } from '../actions/index';
+import { loadGames, loadUsers, loadAchievements } from '../actions/index';
 import Id from '../components/profile_user';
 import MatchHistory from '../components/match_history';
 import Achievements from '../components/achievements';
@@ -18,6 +18,7 @@ class Profile extends Component {
         //Check if there is a user logged in
         if (localStorage.getItem("token")) {
             this.props.loadGames();
+            this.props.loadAchievements(this.userId());
 
             //Check if a not logged in users info is requested
             if (this.props.match.params.username){
@@ -51,12 +52,22 @@ class Profile extends Component {
 
     }
 
+    userId() {
+        if (this.props.match.params.username){
+            return localStorage.id;
+        }
+        return localStorage.id;
+    }
+
     render() {
         return (
             <div>
                 <Id user={this.user()}/>
                 <MatchHistory/>
-                <Achievements games={this.props.games}/>
+                <Achievements
+                    achievements={this.props.achievements}
+                    userId={this.userId()}
+                    games={this.props.games}/>
             </div>
         )
     }
@@ -65,12 +76,13 @@ class Profile extends Component {
 function mapStateToProps(state) {
     return {
         games: state.games,
-        players: state.players
+        players: state.players,
+        achievements: state.achievements
     };
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({loadUsers, loadGames}, dispatch)
+    return bindActionCreators({loadUsers, loadGames, loadAchievements}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
