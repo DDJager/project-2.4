@@ -7,6 +7,56 @@ from bson.objectid import ObjectId
 from bson import Binary, Code
 from bson.json_util import dumps
 
+# both players lose
+# {
+# 	"winner": null,
+# 	"losers": [
+# 		{ "id": 1},
+# 		{ "id": 2}
+# 		]
+# }
+
+# one player wins and the other loses
+# {
+# 	"winner": { "id": 1 },
+# 	"losers": [ { "id": 2 } ]
+# }
+@api.route('/game/stop', methods=['POST'], defaults={'game_id': None})
+@api.route('/game/stop/', methods=['POST'], defaults={'game_id': None})
+@api.route('/game/stop/<int:game_id>', methods=['POST'])
+@auth.login_required
+def game_stop(game_id):
+    if game_id is None:
+        return jsonify({
+            'result': 'failure',
+            'error': 400,
+            'message': 'game id parameter not provided'
+        }), 400
+
+    game = mongo.db.games.find_one({
+        "gameId": int(game_id)
+    })
+    print(game)
+    if game is None:
+        return jsonify({
+            'result': 'failure',
+            'error': '404',
+            'message': 'game does not exist'
+        }), 404
+
+    mongo.db.games.update_one(
+        {'_id': ObjectId(str(game['_id']))},
+        { "$set": {
+            "winner": request.json.get('winner'),
+            "losers": request.json.get('losers')
+        }
+    })
+
+    return jsonify({
+        'status': 'success'
+    }), 200
+
+
 # Example code
 # {
 # 	"players": [1, 2],
@@ -14,9 +64,9 @@ from bson.json_util import dumps
 # 	"word": "PIZZA",
 # 	"gameId": 2
 # }
-@api.route('/history', methods=['POST'])
+@api.route('/game/new', methods=['POST'])
 @auth.login_required
-def add_game():
+def game_new():
     if request.json.get('players') is None:
         return jsonify({
             'result': 'failure',
@@ -62,48 +112,38 @@ def add_game():
             ],
             "word": request.json.get('word'),
             "gameId": request.json.get('gameId'),
-            "lettersPlayed": []
+            "lettersPlayed": [],
+            "winner": None,
+            "losers": []
         }
-
-        game_id = str(games.insert_one(game).inserted_id)
+        games.insert_one(game)
         return jsonify({
-            'game': {
-                'id': str(game_id)
-            }
+            'status': 'success'
         }), 201
     else:
-        game_id = look_up_game['_id']
         return jsonify({
-            'game': {
-                'id': str(game_id)
-            }
-        }), 200
+            'result': 'failure',
+            'error': '409',
+            'message': 'conflicted. game already exists'
+        }), 409
 
 
-#
-# <id> is the mongo ObjectId not the game id
 #
 # Example code
 # {
 # 	"letter": "B",
 # 	"player": 2
 # }
-@api.route('/history/', methods=['POST'], defaults={'id': None})
-@api.route('/history/<id>', methods=['POST'])
+@api.route('/game/play', methods=['POST'], defaults={'game_id': None})
+@api.route('/game/play/', methods=['POST'], defaults={'game_id': None})
+@api.route('/game/play/<game_id>', methods=['POST'])
 @auth.login_required
-def add_history(id):
-    if id is None:
+def game_play(game_id):
+    if game_id is None:
         return jsonify({
             'result': 'failure',
             'error': 400,
-            'message': 'id field not provided'
-        }), 400
-
-    if not ObjectId.is_valid(id):
-        return jsonify({
-            'result': 'failure',
-            'error': '400',
-            'message': 'id is not valid'
+            'message': 'game id parameter not provided'
         }), 400
 
     if request.json.get('player') is None:
@@ -120,12 +160,12 @@ def add_history(id):
             'message': 'letter field is required'
         }), 400
 
-    game_id = {
-        "_id": ObjectId(id)
-    };
+    gameId = {
+        "gameId": int(game_id)
+    }
     games = mongo.db.games
-    game = games.find_one(game_id)
-
+    game = games.find_one(gameId)
+    print(game)
     if game is None:
         return jsonify({
             'result': 'failure',
@@ -143,7 +183,7 @@ def add_history(id):
     lettersPlayed.append(letterPlayed)
 
     mongo.db.games.update_one(
-        {'_id': ObjectId(id)},
+        {'_id': ObjectId(str(game['_id']))},
         { "$set": {
             "lettersPlayed": lettersPlayed
         }
@@ -153,28 +193,40 @@ def add_history(id):
         'status': 'success'
     }), 200
 
-@api.route('/history/get/id', methods=['GET'], defaults={'game_id': None})
-@api.route('/history/get/id/', methods=['GET'], defaults={'game_id': None})
-@api.route('/history/get/id/<int:game_id>', methods=['GET'])
-def get_id_by_game_id(game_id):
-    if game_id is None:
-        return jsonify({
-            'result': 'failure',
-            'error': 400,
-            'message': 'game_id field not provided'
-        }), 400
-
-    game = mongo.db.games.find_one({
-        "gameId": game_id
+@api.route('/history/<int:user_id>')
+@auth.login_required
+def history(user_id):
+    games = mongo.db.games.find({
+        'players': {
+            '$elemMatch': {
+                'id': user_id
+            }
+        }
     })
+    won = 0;
+    lost = 0;
+    played = 0;
+    # print(g.user.id)
+    # print(games)
+    for game in games:
+        played += 1
+        if game['winner'] is not None:
+            if game['winner']['id'] == user_id:
+                won += 1
 
-    if game is None:
-        return jsonify({
-            'result': 'failure',
-            'error': 404,
-            'message': 'game does not exist'
-        }), 404
-    else:
-        return jsonify({
-            "id": str(game['_id'])
-        }), 200
+        if len(game['losers']) > 0:
+            for loser in game['losers']:
+                if loser['id'] == user_id:
+                    lost += 1
+
+        # print(game)
+
+
+    return jsonify({
+        'result': 'success',
+        'games': {
+            'played': played,
+            'won': won,
+            'lost': lost
+        }
+    }), 200
