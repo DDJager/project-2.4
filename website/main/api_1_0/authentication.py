@@ -67,7 +67,8 @@ def sign_up():
             'id': user.id,
             'username': username,
             'picture_url': picture_url,
-            'description': description
+            'description': description,
+            'ranking': 1
         }
     }), 201 # created
 
@@ -84,7 +85,8 @@ def sign_in():
             'id': g.user.id,
             'username': g.user.username,
             'picture_url': g.user.picture_url,
-            'description': g.user.description
+            'description': g.user.description,
+            'ranking': g.user.ranking
         }
     }), 200
 
