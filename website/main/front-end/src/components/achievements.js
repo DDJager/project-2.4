@@ -47,7 +47,7 @@ class Achievements extends Component {
 
     achievement(achieve) {
         return (
-            <div className="achievement">
+            <div className="achievement" key={achieve.name}>
                 <h4>{achieve.name}</h4><br/>
                 {achieve.description}
             </div>

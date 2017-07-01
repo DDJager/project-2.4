@@ -224,6 +224,7 @@ def history(user_id):
 
     return jsonify({
         'result': 'success',
+        'id': user_id,
         'games': {
             'played': played,
             'won': won,

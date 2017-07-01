@@ -1,15 +1,17 @@
 import React from 'react';
 import Match from './match';
 
-const MatchHistory = ()=>{
+const MatchHistory = (props)=>{
+    const {stats} = props;
+    if (!props.stats) {return <h3>loading</h3>}
    return (
+
        <div>
            <h3>Match History</h3><br/>
            <div>
-               <Match name="game" result="result"/>
-               {/*
-               *for every match in the matchhistory place an match object with the right parameters
-               */}
+               games won: {stats.won}<br/>
+               games lost: {stats.lost}<br/>
+               games played: {stats.played}
            </div>
        </div>
    )

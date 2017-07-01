@@ -70,7 +70,7 @@ def get_user_by_username(username):
 
 @api.route('/users/')
 @api.route('/users')
-#@auth.login_required
+@auth.login_required
 def get_users():
 
     # SELECT * FROM users

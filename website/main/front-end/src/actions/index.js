@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = `http://localhost:5000/api/v1-0`;
+const URL = `http://192.168.0.106:5000/api/v1-0`;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
@@ -10,6 +10,7 @@ export const PLAYERS = 'users';
 export const AUTH_CHECK = 'authCheck';
 export const LOGOUT = 'logout';
 export const ACHIEVEMENTS = ' achievements';
+export const MATCH_HISTORY = 'matchHistory';
 
 export function createAccount(values, success, failed) {
     const target = `${URL}/authenticate/`;
@@ -110,6 +111,20 @@ export function loadAchievements(id) {
     const request = axios.get(target, headers);
     return {
         type: ACHIEVEMENTS,
+        payload: request
+    }
+}
+
+export function loadMatchHistory(id) {
+    const target = `${URL}/history/${id}`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: MATCH_HISTORY,
         payload: request
     }
 }
