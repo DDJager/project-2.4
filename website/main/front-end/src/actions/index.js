@@ -6,6 +6,7 @@ export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
 export const GAMES = 'games';
 export const PLAYERS = 'users';
+export const USER = 'user';
 export const AUTH_CHECK = 'authCheck';
 export const LOGOUT = 'logout';
 export const ACHIEVEMENTS = ' achievements';
@@ -61,6 +62,20 @@ export function loadUsers() {
     const request = axios.get(target, headers);
     return {
         type: PLAYERS,
+        payload: request
+    }
+}
+
+export function loadUsername(username) {
+    const target = `${URL}/search/user/${username}`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: USER,
         payload: request
     }
 }

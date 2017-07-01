@@ -35,7 +35,6 @@ class Achievements extends Component {
         });
     }
 
-// TODO get info about the owned achievements
     achievementList() {
         const selected = this.state.selectedGame;
         return _.map(this.props.achievements[this.props.userId], (achieve) => {

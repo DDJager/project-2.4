@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
 
-import { loadGames, loadUsers, loadAchievements, loadMatchHistory } from '../actions/index';
+import { loadGames, loadUsername, loadAchievements, loadMatchHistory } from '../actions/index';
 import Id from '../components/profile_user';
 import MatchHistory from '../components/match_history';
 import Achievements from '../components/achievements';
@@ -23,7 +23,6 @@ class Profile extends Component {
                 this.props.loadAchievements(this.userId());
                 this.props.loadMatchHistory(this.userId());
             }else{
-
                 const interval = setInterval(()=>{
                     if (this.userId()){
                         this.props.loadAchievements(this.userId());
@@ -37,7 +36,7 @@ class Profile extends Component {
 
             //Check if a not logged in users info is requested
             if (this.props.match.params.username) {
-                this.props.loadUsers();
+                this.props.loadUsername(this.props.match.params.username);
             }
         }
     }
@@ -103,7 +102,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({loadUsers, loadGames, loadAchievements, loadMatchHistory}, dispatch)
+    return bindActionCreators({loadUsername, loadGames, loadAchievements, loadMatchHistory}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
