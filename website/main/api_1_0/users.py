@@ -82,6 +82,7 @@ def get_users():
     # Loop trough all users. Append a list with the db row data everytime
     for user in users:
         data.append({
+            'id': user.id,
             'username': user.username,
             'picture_url': user.picture_url,
             'description': user.description

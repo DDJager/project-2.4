@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 import { loadUsers } from '../actions/index';
 
@@ -11,9 +12,10 @@ class players extends Component {
     }
 
     userList() {
-        if (this.props.players.list) {
+        console.log(this.props.players)
+        if (this.props.players) {
             return (
-                this.props.players.list.map((player) => {
+                _.map(this.props.players, (player) => {
                     const target = `/profile/${player.username}`;
                     return (
                         <li key={player.username}><Link to={target}>{player.username}</Link></li>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
+import _ from 'lodash';
 
 import { loadGames, loadUsers, loadAchievements, loadMatchHistory } from '../actions/index';
 import Id from '../components/profile_user';
@@ -34,12 +35,12 @@ class Profile extends Component {
      */
     user() {
         const params = this.props.match.params;
-        const players = this.props.players.list;
+        const players = this.props.players;
 
         if (params.username && players){
-            for (let i = 0; i < players.length; i++) {
-                if (players[i].username === params.username) {
-                    return players[i];
+            for (let player in players) {
+                if (players[player].username === params.username) {
+                    return players[player];
                 }
             }
         }else{
