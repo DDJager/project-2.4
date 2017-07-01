@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
-import _ from 'lodash';
 
 import { loadGames, loadUsers, loadAchievements, loadMatchHistory } from '../actions/index';
 import Id from '../components/profile_user';
@@ -18,11 +17,26 @@ class Profile extends Component {
         //Check if there is a user logged in
         if (localStorage.getItem("token")) {
             this.props.loadGames();
-            this.props.loadAchievements(this.userId());
-            this.props.loadMatchHistory(this.userId());
+
+            //Check if the user is already loaded so further information can be requested from the api
+            if (this.userId()) {
+                this.props.loadAchievements(this.userId());
+                this.props.loadMatchHistory(this.userId());
+            }else{
+
+                const interval = setInterval(()=>{
+                    if (this.userId()){
+                        this.props.loadAchievements(this.userId());
+                        this.props.loadMatchHistory(this.userId());
+                        clearInterval(interval);
+                    }
+                }, 1);
+            }
+
+
 
             //Check if a not logged in users info is requested
-            if (this.props.match.params.username){
+            if (this.props.match.params.username) {
                 this.props.loadUsers();
             }
         }
@@ -55,7 +69,8 @@ class Profile extends Component {
 
     userId() {
         if (this.props.match.params.username){
-            return localStorage.id;
+            const user = this.user();
+            return user ? user.id : user;
         }
         return localStorage.id;
     }

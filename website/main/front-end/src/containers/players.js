@@ -12,7 +12,6 @@ class players extends Component {
     }
 
     userList() {
-        console.log(this.props.players)
         if (this.props.players) {
             return (
                 _.map(this.props.players, (player) => {

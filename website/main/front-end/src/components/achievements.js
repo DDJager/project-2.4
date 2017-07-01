@@ -55,6 +55,9 @@ class Achievements extends Component {
     }
 
     render() {
+        if (this.props.user) {
+            return (<div></div>)
+        }
         return (
             <div>
                 <h3>Achievements</h3>
