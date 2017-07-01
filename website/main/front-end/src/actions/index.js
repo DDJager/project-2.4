@@ -4,7 +4,6 @@ const URL = `http://192.168.0.106:5000/api/v1-0`;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
-export const LOAD_PROFILE = 'loadProfile';
 export const GAMES = 'games';
 export const PLAYERS = 'users';
 export const AUTH_CHECK = 'authCheck';
@@ -34,16 +33,6 @@ export function login(values) {
     const request = axios.get(target, headers);
     return {
         type: LOGIN,
-        payload: request
-    }
-}
-
-export function loadProfile(id) {
-    const target = `${URL}/user/${id}/profile`;
-    const request= axios.get(target);
-
-    return {
-        type: LOAD_PROFILE,
         payload: request
     }
 }

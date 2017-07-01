@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux';
 
 import { checkLogin } from '../actions/index';
 
-import Header from './header';
-
 class LoginLogic extends Component {
 
     componentDidMount() {

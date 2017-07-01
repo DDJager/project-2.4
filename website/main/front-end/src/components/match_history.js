@@ -1,5 +1,4 @@
 import React from 'react';
-import Match from './match';
 
 const MatchHistory = (props)=>{
     const {stats} = props;
