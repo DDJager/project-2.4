@@ -6,6 +6,7 @@ import { loadGames, loadUsername, loadAchievements, loadMatchHistory } from '../
 import Id from '../components/profile_user';
 import MatchHistory from '../components/match_history';
 import Achievements from '../components/achievements';
+import UserSearch from './user_search';
 
 class Profile extends Component {
     /*
@@ -22,15 +23,16 @@ class Profile extends Component {
             if (this.userId()) {
                 this.props.loadAchievements(this.userId());
                 this.props.loadMatchHistory(this.userId());
-            }else{
-                const interval = setInterval(()=>{
-                    if (this.userId()){
-                        this.props.loadAchievements(this.userId());
-                        this.props.loadMatchHistory(this.userId());
-                        clearInterval(interval);
-                    }
-                }, 1);
             }
+            // else{
+            //     const interval = setInterval(()=>{
+            //         if (this.userId()){
+            //             this.props.loadAchievements(this.userId());
+            //             this.props.loadMatchHistory(this.userId());
+            //             clearInterval(interval);
+            //         }
+            //     }, 1);
+            // }
 
 
 
@@ -75,12 +77,23 @@ class Profile extends Component {
     }
 
     gamesStats() {
-        return this.props.matchHistory[this.userId()];
+        const id = this.userId();
+        return id ? this.props.matchHistory[id] : {};
+    }
+
+    loadMissing() {
+        if (this.userId()) {
+            if (!this.props.matchHistory) {
+                this.props.loadAchievements(this.userId());
+                this.props.loadMatchHistory(this.userId());
+            }
+        }
     }
 
     render() {
+        // this.loadMissing();
         return (
-            <div>
+            <div><UserSearch/>
                 <Id user={this.user()}/>
                 <MatchHistory stats={this.gamesStats()}/>
                 <Achievements

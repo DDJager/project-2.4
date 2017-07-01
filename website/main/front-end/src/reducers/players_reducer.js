@@ -11,11 +11,12 @@ export default function(state = {}, action) {
         });
         return newState;
     }else if(action.type === USER){
-        const {user} = action.payload.data;
-        let newState = Object.assign({}, state);
-        newState[user.id] = user;
-        return newState;
-    }else {
-        return state;
+        if (action.payload.status){
+            const {user} = action.payload.data;
+            let newState = Object.assign({}, state);
+            newState[user.id] = user;
+            return newState;
+        }
     }
+    return state;
 }
