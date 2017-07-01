@@ -39,13 +39,26 @@ class Game extends Component {
         const game = this.getGame();
         if (!game) return <h1>Loading...</h1>;
         return (
-            <div>
-                <h1>{game.name}</h1>
-                <p>{game.description}</p>
-                <h3>Achievements</h3>
-                <ul>
-                    {this.achievements(game)}
-                </ul>
+            <div className="content-section z-depth-2 grey lighten-5">
+                <div className="row">
+                    <div className="col s10 offset-s1">
+                        <div className="content-text-section">
+                            <div className="profile-section">
+                                <h1>{game.name}</h1>
+                            </div>
+                            <div className="profile-section">
+                                <p>{game.description}</p>
+                            </div>
+
+                            <div className="profile-section">
+                                <h4><b>Achievements</b></h4>
+                            </div>
+                            <ul>
+                                {this.achievements(game)}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

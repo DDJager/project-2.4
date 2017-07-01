@@ -27,10 +27,19 @@ class players extends Component {
 
     render() {
         return (
-            <div>
-                <ul>
-                    {this.userList()}
-                </ul>
+            <div className="content-section z-depth-2 grey lighten-5">
+                <div className="row">
+                    <div className="col s10 offset-s1">
+                        <div className="content-text-section">
+                            <div className="profile-section">
+                                <h1>Players</h1>
+                            </div>
+                            <ul>
+                                {this.userList()}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

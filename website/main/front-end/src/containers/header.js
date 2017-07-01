@@ -11,6 +11,7 @@ class Header extends Component {
         if (localStorage.getItem("token")) {
             return (
                 <button
+                    className="btn"
                     onClick={this.props.logout}
                 >Logout</button>
             )
@@ -19,28 +20,32 @@ class Header extends Component {
 
     user() {
         if (localStorage.getItem("token")) {
-            return localStorage.getItem("username")
+            return "Welkom " + localStorage.getItem("username")
         }
     }
 
     authenticate() {
         if (!localStorage.getItem("token")) {
             return (
-                <Link to="/authenticate"><div className="btn">Authenticate</div></Link>
+                <Link to="/authenticate" className="section">Authenticate</Link>
             )
         }
     }
 
     render() {
         return (
-            <div className="header">
-                <Link to="/"><div className="btn">Home</div></Link>
-                <Link to="/profile"><div className="btn">Profile</div></Link>
-                <Link to="/players"><div className="btn">players</div></Link>
-                <Link to="/games"><div className="btn">games</div></Link>
-                {this.authenticate()}
-                {this.user()}
-                {this.logout()}
+            <div className="header teal darken-2 z-depth-3 section">
+                <div className="row row-no-margin-bottom">
+                    <div className="col s10 offset-s1 navigation">
+                        <Link to="/" className="section">Home</Link>
+                        <Link to="/profile" className="section">Profile</Link>
+                        <Link to="/players" className="section">Players</Link>
+                        <Link to="/games" className="section">Games</Link>
+                        {this.authenticate()}
+                        <span className="user-welcome">{this.user()}</span>
+                        {this.logout()}
+                    </div>
+                </div>
             </div>
         )
     }

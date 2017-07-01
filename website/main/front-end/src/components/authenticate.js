@@ -22,10 +22,16 @@ export default class authenticate extends Component {
 
     render() {
         return (
-            <div>
-                <button onClick={()=>this.toLogin()}>Login</button>
-                <button onClick={()=>this.toSignUp()}>Register</button>
-                {this.state.screen}
+            <div className="content-section z-depth-2 grey lighten-5">
+                <div className="row">
+                    <div className="col s10 offset-s1">
+                        <div className="content-text-section">
+                            <button className="btn auth-btn" onClick={()=>this.toLogin()}>Switch to Login</button>
+                            <button className="btn auth-btn" onClick={()=>this.toSignUp()}>Switch to Register</button>
+                            {this.state.screen}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
