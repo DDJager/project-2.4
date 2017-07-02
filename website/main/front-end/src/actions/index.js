@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = `http://192.168.0.106:5000/api/v1-0`;
+const URL = `http://192.168.0.107:5000/api/v1-0`;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
@@ -11,12 +11,28 @@ export const AUTH_CHECK = 'authCheck';
 export const LOGOUT = 'logout';
 export const ACHIEVEMENTS = ' achievements';
 export const MATCH_HISTORY = 'matchHistory';
+export const UPDATE_ACCOUNT = 'updateAccount';
 
 export function createAccount(values, success, failed) {
     const target = `${URL}/authenticate/`;
     const request = axios.post(target, values)
         .then((response)=>success())
         .catch(()=>failed());
+    return {
+        type: CREATE_ACCOUNT,
+        payload: request
+    }
+}
+
+export function updateAccount(id, values) {
+    const target = `${URL}/authenticate/`;
+    const headers = {
+        auth: {
+            username: values.username,
+            password: values.password
+        }
+    };
+    const request = axios.post(target, values, headers);
     return {
         type: CREATE_ACCOUNT,
         payload: request
