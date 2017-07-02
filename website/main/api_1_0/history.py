@@ -23,7 +23,7 @@ from bson.json_util import dumps
 # }
 @api.route('/game/stop', methods=['POST'], defaults={'game_id': None})
 @api.route('/game/stop/', methods=['POST'], defaults={'game_id': None})
-@api.route('/game/stop/<int:game_id>', methods=['POST'])
+@api.route('/game/stop/<game_id>', methods=['POST'])
 # @auth.login_required
 def game_stop(game_id):
     if game_id is None:
@@ -34,7 +34,7 @@ def game_stop(game_id):
         }), 400
 
     game = mongo.db.games.find_one({
-        "gameId": int(game_id)
+        "gameId": game_id
     })
     print(game)
     if game is None:
