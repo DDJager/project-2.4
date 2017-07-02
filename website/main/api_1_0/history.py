@@ -24,7 +24,7 @@ from bson.json_util import dumps
 @api.route('/game/stop', methods=['POST'], defaults={'game_id': None})
 @api.route('/game/stop/', methods=['POST'], defaults={'game_id': None})
 @api.route('/game/stop/<int:game_id>', methods=['POST'])
-@auth.login_required
+# @auth.login_required
 def game_stop(game_id):
     if game_id is None:
         return jsonify({
@@ -65,7 +65,7 @@ def game_stop(game_id):
 # 	"gameId": 2
 # }
 @api.route('/game/new', methods=['POST'])
-@auth.login_required
+# @auth.login_required
 def game_new():
     if request.json.get('players') is None:
         return jsonify({
@@ -88,44 +88,70 @@ def game_new():
             'message': 'Word should be provided'
         }), 400
 
-    if request.json.get('gameId') is None:
-        return jsonify({
-            'result': 'failure',
-            'error': '400',
-            'message': 'Requires gameId field'
-        }), 400
-
     games = mongo.db.games
-    # check if game already exists
-    look_up_game = games.find_one({
-        "gameId": request.json.get('gameId')
+
+    game = {
+        "playerOne": {
+            "id": request.json.get('playerOne')
+        },
+        "players": [
+            { "id": request.json.get('players')[0]},
+            { "id": request.json.get('players')[1]}
+        ],
+        "word": request.json.get('word'),
+        # "gameId": request.json.get('gameId'),
+        "lettersPlayed": [],
+        "winner": None,
+        "losers": []
+    }
+    inserted_game = games.insert_one(game)
+
+    games.update_one(
+        {'_id': inserted_game.inserted_id},
+        { "$set": {
+            "gameId": str(inserted_game.inserted_id)
+        }
     })
 
-    if look_up_game is None:
-        game = {
-            "playerOne": {
-                "id": request.json.get('playerOne')
-            },
-            "players": [
-                { "id": request.json.get('players')[0]},
-                { "id": request.json.get('players')[1]}
-            ],
-            "word": request.json.get('word'),
-            "gameId": request.json.get('gameId'),
-            "lettersPlayed": [],
-            "winner": None,
-            "losers": []
-        }
-        games.insert_one(game)
-        return jsonify({
-            'status': 'success'
-        }), 201
-    else:
-        return jsonify({
-            'result': 'failure',
-            'error': '409',
-            'message': 'conflicted. game already exists'
-        }), 409
+    look_up_game = games.find_one({
+        "gameId": str(inserted_game.inserted_id)
+    })
+
+    return jsonify({
+        'status': 'success',
+        'gameId': look_up_game['gameId']
+    }), 201
+
+    # check if game already exists
+    # look_up_game = games.find_one({
+    #     "gameId": request.json.get('gameId')
+    # })
+
+    # if look_up_game is None:
+    #     game = {
+    #         "playerOne": {
+    #             "id": request.json.get('playerOne')
+    #         },
+    #         "players": [
+    #             { "id": request.json.get('players')[0]},
+    #             { "id": request.json.get('players')[1]}
+    #         ],
+    #         "word": request.json.get('word'),
+    #         "gameId": request.json.get('gameId'),
+    #         "lettersPlayed": [],
+    #         "winner": None,
+    #         "losers": []
+    #     }
+    #     games.insert_one(game)
+    #     return jsonify({
+    #         'status': 'success'
+    #     }), 201
+    # else:
+    #     return jsonify({
+    #         'result': 'failure',
+    #         'error': '409',
+    #         'message': 'conflicted. game already exists'
+    #     }), 409
 
 
 #
@@ -137,7 +163,7 @@ def game_new():
 @api.route('/game/play', methods=['POST'], defaults={'game_id': None})
 @api.route('/game/play/', methods=['POST'], defaults={'game_id': None})
 @api.route('/game/play/<game_id>', methods=['POST'])
-@auth.login_required
+# @auth.login_required
 def game_play(game_id):
     if game_id is None:
         return jsonify({
