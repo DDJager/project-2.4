@@ -9,7 +9,7 @@ from flask_httpauth import HTTPBasicAuth
 
 
 ## Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/project2-4'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@localhost/project2-4'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '\x8b;\x98\xf0{\x9f;\xb4\x93\xcd5F\x18\xbe\xf3\xa5D\xe4\x9aB^\xc0v\xe3'

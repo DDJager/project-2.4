@@ -15,11 +15,10 @@ class signUp extends Component {
     }
 
     onSubmit(values) {
-        this.props.createAccount(values, ()=>{
-            this.successful();
-        },
-            this.failed()
-            );
+        this.props.createAccount(
+            values,
+            ()=>{this.successful();},
+            ()=>{this.failed();})
     }
 
     successful() {
