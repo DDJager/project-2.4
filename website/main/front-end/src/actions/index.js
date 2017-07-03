@@ -14,7 +14,7 @@ export const MATCH_HISTORY = 'matchHistory';
 export const UPDATE_ACCOUNT = 'updateAccount';
 
 export function createAccount(values, success, failed) {
-    const target = `${URL}/authenticate/`;
+    const target = `${URL}/signup`;
     const request = axios.post(target, values)
         .then((response)=>success())
         .catch(()=>failed());
