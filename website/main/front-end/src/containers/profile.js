@@ -84,7 +84,8 @@ function mapStateToProps(state) {
     return {
         games: state.games,
         players: state.players,
-        achievements: state.achievements
+        achievements: state.achievements,
+        user: state.user
     };
 }
 
