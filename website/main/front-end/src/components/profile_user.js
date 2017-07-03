@@ -13,7 +13,7 @@ class Id extends Component {
 
                             <div className="profile-section">
                                 <h4><b>Profielafbeelding</b></h4>
-                                <img src={`${this.props.user.picture_url}`} alt={this.props.user.username} width={100} height={100} />
+                                <img src={this.props.user.picture_url} alt={this.props.user.username} width={100} height={100} />
                             </div>
 
                             <div className="profile-section">

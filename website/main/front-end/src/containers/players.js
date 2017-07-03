@@ -11,14 +11,22 @@ class players extends Component {
     }
 
     userList() {
-
+        console.log(this.props.players.list);
+        let userStyle = {
+            marginTop: 5,
+            marginBottom: 5
+        };
         if (this.props.players.list) {
             return (
                 this.props.players.list.map((player) => {
                   if (player.username != localStorage.getItem("username")) {
                     const target = `/profile/${player.username}`;
                     return (
-                        <li key={player.username}><Link to={target}>{player.username}</Link></li>
+                        <li className="collection-item avatar" key={player.username} style={userStyle}>
+                          <img src={player.picture_url} width={75} height={75} />
+                          <span className="title" style={{fontSize: '2em'}}> @{player.username} </span>
+                          <Link to={target} className="secondary-content btn">View Profile</Link>
+                        </li>
                     )
                   }
               })
@@ -44,7 +52,7 @@ class players extends Component {
                             <div className="profile-section">
                                 <h1>Players</h1>
                             </div>
-                            <ul>
+                            <ul className="collection">
                                 {this.userList()}
                             </ul>
                         </div>
