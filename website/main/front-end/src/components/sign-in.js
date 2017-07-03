@@ -22,10 +22,16 @@ export default class login extends Component {
 
     render() {
         return (
-            <div>
-                <button onClick={()=>this.toLogin()}>Sign in</button>
-                <button onClick={()=>this.toSignUp()}>Register</button>
-                {this.state.screen}
+            <div className="content-section z-depth-2 grey lighten-5">
+                <div className="row">
+                    <div className="col s10 offset-s1">
+                        <div className="content-text-section">
+                            <button className="btn auth-btn" onClick={()=>this.toLogin()}>Click here to sign in</button>
+                            <button className="btn auth-btn" onClick={()=>this.toSignUp()}>Click here to sign up</button>
+                            {this.state.screen}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

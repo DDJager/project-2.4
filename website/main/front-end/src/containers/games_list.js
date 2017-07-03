@@ -27,11 +27,20 @@ class GamesList extends Component {
 
     render() {
         return (
-            <div>
-                {this.loggedIn()}
-                <ul>
-                    {this.games()}
-                </ul>
+            <div className="content-section z-depth-2 grey lighten-5">
+              {this.loggedIn()}
+                <div className="row">
+                    <div className="col s10 offset-s1">
+                        <div className="content-text-section">
+                            <div className="profile-section">
+                                <h1>Game list</h1>
+                            </div>
+                            <ul>
+                                {this.games()}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

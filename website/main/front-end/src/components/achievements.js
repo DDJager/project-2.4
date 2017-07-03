@@ -11,8 +11,17 @@ class Achievements extends Component {
     }
 
     dropdownOptions() {
+        const games = {};
+        _.map(this.props.achievements[this.props.userId], (achievement)=>{
+            const game = achievement.game;
+            games[game.id] = {
+                id: game.id,
+                name: game.name
+            }
+        });
+
         return (
-            _.map(this.props.games, (game)=> {
+            _.map(games, (game)=> {
                 return (
                     <option key={game.id} value={game.id}>{game.name}</option>
                 )
@@ -29,9 +38,9 @@ class Achievements extends Component {
 // TODO get info about the owned achievements
     achievementList() {
         const selected = this.state.selectedGame;
-        return _.map(this.props.games, (game) => {
-            if (game.id == selected) {
-                return game.achievements.map(this.achievement)
+        return _.map(this.props.achievements[this.props.userId], (achieve) => {
+            if (achieve.game.id == selected) {
+                return this.achievement(achieve);
             }
         })
     }
@@ -47,21 +56,27 @@ class Achievements extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Achievements</h3>
-                <select
-                    onChange={this.onChangeHandle}
-                    value={this.state.selectedGame}>
+            <div className="content-section z-depth-2 grey lighten-5">
+                <div className="row">
+                    <div className="col s10 offset-s1">
+                         <div className="content-text-section">
+                            <h4><b>Achievements</b></h4>
+                            <select
+                                onChange={this.onChangeHandle}
+                                value={this.state.selectedGame}>
 
-                    <option defaultValue> -- select a game -- </option>
-                    {this.dropdownOptions()}
+                                <option defaultValue> -- select a game -- </option>
+                                {this.dropdownOptions()}
 
-                </select>
+                            </select>
 
-                {/*list of all achievements belonging to the selected game*/}
-                { this.achievementList() }
-
+                            {/*list of all achievements belonging to the selected game*/}
+                            { this.achievementList() }
+                        </div>
+                    </div>
+                </div>
             </div>
+
         );
     }
 }

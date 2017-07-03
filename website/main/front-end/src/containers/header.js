@@ -12,20 +12,28 @@ class Header extends Component {
         const username = localStorage.getItem("username");
         const profileLink = "/profile/" + username;
         return (
-          <div>
-          <Link to="/"><div className="btn">Home</div></Link>
-          <Link to={profileLink}><div className="btn">Profile</div></Link>
-          <Link to="/players"><div className="btn">Players</div></Link>
-          <Link to="/games"><div className="btn">Games</div></Link>
-          {username}
-          <button onClick={this.props.logout}>Logout</button>
+          <div className="header teal darken-2 z-depth-3 section">
+              <div className="row row-no-margin-bottom">
+                  <div className="col s10 offset-s1 navigation">
+                      <Link to="/" className="section">Home</Link>
+                      <Link to={profileLink} className="section">Profile</Link>
+                      <Link to="/players" className="section">Players</Link>
+                      <Link to="/games" className="section">Games</Link>
+                      <span className="user-welcome">{username}</span>
+                      <button onClick={this.props.logout}>Logout</button>
+                  </div>
+              </div>
           </div>
         )
       } else {
         return (
-          <div>
-          <Link to="/"><div className="btn">Home</div></Link>
-          <Link to="/login"><div className="btn">Sign in</div></Link>
+          <div className="header teal darken-2 z-depth-3 section">
+              <div className="row row-no-margin-bottom">
+                  <div className="col s10 offset-s1 navigation">
+                      <Link to="/" className="section">Home</Link>
+                      <Link to="/login" className="section">Sign In</Link>
+                  </div>
+              </div>
           </div>
         )
       }

@@ -38,25 +38,25 @@ class Login extends Component {
 
     render() {
         return (
-          <div>
-          {this.loggedIn()}
-            <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-                {this.statusCheck()}
+            <div className="auth-container">
+              {this.loggedIn()}
+                <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+                    {this.statusCheck()}
 
-                <Field
-                    label="Username"
-                    name="username"
-                    type="text"
-                    component={formInput}
-                />
-                <Field
-                    label="Password"
-                    name="password"
-                    type="password"
-                    component={formInput}
-                />
-                <button className="btn btn-primary" type="submit">Sign in</button>
-            </form>
+                    <Field
+                        label="Username"
+                        name="username"
+                        type="text"
+                        component={formInput}
+                    />
+                    <Field
+                        label="Password"
+                        name="password"
+                        type="password"
+                        component={formInput}
+                    />
+                    <button className="btn" type="submit">Log in</button>
+                </form>
             </div>
         );
     }

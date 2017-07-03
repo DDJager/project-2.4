@@ -3,6 +3,7 @@ from flask import jsonify
 from main.models import auth
 
 @api.route('/friendships/')
+@api.route('/friendships')
 @auth.login_required
 def get_friendships():
     # @TODO
