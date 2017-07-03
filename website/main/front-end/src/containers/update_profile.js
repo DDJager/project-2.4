@@ -34,7 +34,7 @@ class EditAccount extends Component{
         if (!nose) nose = 0;
         if (!mouth) mouth = 0;
 
-        const lastSeven = picture_url.substr(picture_url.length - 6);
+        const lastSeven = picture_url.substr(picture_url.length - 7);
         if (lastSeven.charAt(0) === '/') {
             color = lastSeven.replace('/','');
         }else {
