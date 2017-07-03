@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
+import { Redirect } from 'react-router-dom';
 
 import { loadGames, loadUsername, loadAchievements, loadMatchHistory } from '../actions/index';
 import Id from '../components/profile_user';
@@ -25,13 +26,13 @@ class Profile extends Component {
                 this.props.loadMatchHistory(this.userId());
             }
             else{
-                const interval = setInterval(()=>{
-                    if (this.userId()){
-                        this.props.loadAchievements(this.userId());
-                        this.props.loadMatchHistory(this.userId());
-                        clearInterval(interval);
-                    }
-                }, 1);
+                // const interval = setInterval(()=>{
+                //     if (this.userId()){
+                //         this.props.loadAchievements(this.userId());
+                //         this.props.loadMatchHistory(this.userId());
+                //         clearInterval(interval);
+                //     }
+                // }, 1);
             }
 
 
@@ -68,6 +69,11 @@ class Profile extends Component {
 
     }
 
+    loggedIn() {
+        if (!localStorage.getItem("token")) {
+            return <Redirect to='/login'/>;
+        }
+    }
     userId() {
         if (this.props.match.params.username){
             const user = this.user();
@@ -84,13 +90,13 @@ class Profile extends Component {
     loadMissing() {
 
             if (!this.userId() || !this.props.matchHistory[this.userId()]) {
-                const interval = setInterval(()=>{
-                    if (this.userId()){
-                        this.props.loadAchievements(this.userId());
-                        this.props.loadMatchHistory(this.userId());
-                        clearInterval(interval);
-                    }
-                }, 1);
+                // const interval = setInterval(()=>{
+                //     if (this.userId()){
+                //         this.props.loadAchievements(this.userId());
+                //         this.props.loadMatchHistory(this.userId());
+                //         clearInterval(interval);
+                //     }
+                // }, 1);
             }
 
     }
@@ -98,7 +104,9 @@ class Profile extends Component {
     render() {
         this.loadMissing();
         return (
-            <div><UserSearch/>
+            <div>
+                {this.loggedIn()}
+                <UserSearch/>
                 <Id user={this.user()}/>
                 <MatchHistory stats={this.gamesStats()}/>
                 <Achievements
@@ -115,7 +123,8 @@ function mapStateToProps(state) {
         games: state.games,
         players: state.players,
         achievements: state.achievements,
-        matchHistory: state.matchHistory
+        matchHistory: state.matchHistory,
+        user: state.user
     };
 }
 

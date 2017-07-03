@@ -100,7 +100,7 @@ def get_user_by_username(username):
         }), 400
 
     user = User.query.filter_by(username=username).first()
-    
+
     if not user:
         return jsonify({
             'result': 'failure',

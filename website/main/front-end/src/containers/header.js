@@ -7,43 +7,47 @@ import { checkLogin, logout } from '../actions/index';
 
 class Header extends Component {
 
-    logout() {
-        if (localStorage.getItem("token")) {
-            return (
-                <button
-                    onClick={this.props.logout}
-                >Logout</button>
-            )
-        }
-    }
+    loggedIn() {
+      if(localStorage.getItem("token")) {
+        const username = localStorage.getItem("username");
+        const profileLink = "/profile/" + username;
+        return (
+          <div className="header teal darken-2 z-depth-3 section">
+              <div className="row row-no-margin-bottom">
+                  <div className="col s10 offset-s1 navigation">
+                      <span className="user-welcome"><img className="circle" src={localStorage.getItem('picture_url')} width={50} height={50} /> @{username}</span>
+                      <Link to="/" className="section">Home</Link>
+                      <Link to={profileLink} className="section">Profile</Link>
+                      <Link to="/players" className="section">Players</Link>
+                      <Link to="/games" className="section">Games</Link>
 
-    user() {
-        if (localStorage.getItem("token")) {
-            return localStorage.getItem("username")
-        }
-    }
-
-    authenticate() {
-        if (!localStorage.getItem("token")) {
-            return (
-                <Link to="/authenticate"><div className="btn">Authenticate</div></Link>
-            )
-        }
+                      <button className="btn" onClick={this.props.logout}>Sign out</button>
+                  </div>
+              </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className="header teal darken-2 z-depth-3 section">
+              <div className="row row-no-margin-bottom">
+                  <div className="col s10 offset-s1 navigation">
+                      <Link to="/" className="section">Home</Link>
+                      <Link to="/login" className="section">Sign In</Link>
+                  </div>
+              </div>
+          </div>
+        )
+      }
     }
 
     render() {
-        return (
-            <div className="header">
-                <Link to="/"><div className="btn">Home</div></Link>
-                <Link to="/profile"><div className="btn">Profile</div></Link>
-                <Link to="/players"><div className="btn">players</div></Link>
-                <Link to="/games"><div className="btn">games</div></Link>
-                {this.authenticate()}
-                {this.user()}
-                {this.logout()}
-            </div>
-        )
+      return(
+        <div className="header">
+        {this.loggedIn()}
+        </div>
+      )
     }
+
 }
 
 /*

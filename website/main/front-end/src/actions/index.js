@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = `http://145.37.150.210:5000/api/v1-0`;
+const URL = `http://localhost:5000/api/v1-0`;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
@@ -63,7 +63,7 @@ export function loadGames() {
 }
 
 export function loadUsers() {
-    const target = `${URL}/users/`;
+    const target = `${URL}/users`;
     const headers = {
         auth: {
             username: localStorage.getItem("token")

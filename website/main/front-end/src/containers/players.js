@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import { loadUsers } from '../actions/index';
 
-class players extends Component {
+class Players extends Component {
     componentDidMount() {
         this.props.loadUsers(this.props.user.token);
     }
@@ -17,7 +17,11 @@ class players extends Component {
                 _.map(this.props.players, (player) => {
                     const target = `/profile/${player.username}`;
                     return (
-                        <li key={player.username}><Link to={target}>{player.username}</Link></li>
+                        <li className="collection-item avatar" key={player.username}>
+                          <img src={player.picture_url} width={75} height={75} />
+                          <span className="title" style={{fontSize: '2em'}}> @{player.username} </span>
+                          <Link to={target} className="secondary-content btn">View Profile</Link>
+                        </li>
                     )
                 })
             )
@@ -29,7 +33,7 @@ class players extends Component {
     render() {
         return (
             <div>
-                <ul>
+                <ul className="collection">
                     {this.userList()}
                 </ul>
             </div>
@@ -48,4 +52,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({loadUsers}, dispatch);
 }
 
-export default connect(bindStateToProps, mapDispatchToProps)(players);
+export default connect(bindStateToProps, mapDispatchToProps)(Players);
