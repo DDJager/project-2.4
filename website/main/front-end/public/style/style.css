@@ -7,6 +7,15 @@ body, #root {
     position:relative;
 }
 
+.profile-picture {
+    float: left;
+}
+
+.profile-info {
+  margin-left: 25px;
+  display: inline-block;
+}
+
 .header {
     background-color: black;
     width: 100%;
@@ -53,10 +62,6 @@ body, #root {
     color: #fff;
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
-}
-
-.profile-section {
-    margin-bottom: 25px;
 }
 
 .footer {
