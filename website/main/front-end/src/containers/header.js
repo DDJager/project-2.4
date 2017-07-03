@@ -15,12 +15,13 @@ class Header extends Component {
           <div className="header teal darken-2 z-depth-3 section">
               <div className="row row-no-margin-bottom">
                   <div className="col s10 offset-s1 navigation">
+                      <span className="user-welcome"><img className="circle" src={localStorage.getItem('picture_url')} width={50} height={50} /> @{username}</span>
                       <Link to="/" className="section">Home</Link>
                       <Link to={profileLink} className="section">Profile</Link>
                       <Link to="/players" className="section">Players</Link>
                       <Link to="/games" className="section">Games</Link>
-                      <span className="user-welcome">{username}</span>
-                      <button onClick={this.props.logout}>Logout</button>
+
+                      <button className="btn" onClick={this.props.logout}>Sign out</button>
                   </div>
               </div>
           </div>

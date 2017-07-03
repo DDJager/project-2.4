@@ -55,7 +55,7 @@ class Login extends Component {
                         type="password"
                         component={formInput}
                     />
-                    <button className="btn" type="submit">Log in</button>
+                    <button className="btn" type="submit">Sign in</button>
                 </form>
             </div>
         );
