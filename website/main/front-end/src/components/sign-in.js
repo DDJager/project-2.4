@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import SignUp from '../containers/sign-up';
 import Login from '../containers/login';
 
-export default class authenticate extends Component {
+export default class login extends Component {
     constructor() {
         super();
         this.state = {
@@ -26,8 +26,8 @@ export default class authenticate extends Component {
                 <div className="row">
                     <div className="col s10 offset-s1">
                         <div className="content-text-section">
-                            <button className="btn auth-btn" onClick={()=>this.toLogin()}>Switch to Login</button>
-                            <button className="btn auth-btn" onClick={()=>this.toSignUp()}>Switch to Register</button>
+                            <button className="btn auth-btn" onClick={()=>this.toLogin()}>Click here to sign in</button>
+                            <button className="btn auth-btn" onClick={()=>this.toSignUp()}>Click here to sign up</button>
                             {this.state.screen}
                         </div>
                     </div>

@@ -30,9 +30,16 @@ class Login extends Component {
         }
     }
 
+    loggedIn() {
+      if (localStorage.getItem("token")) {
+        return <Redirect to='/'/>;
+      }
+    }
+
     render() {
         return (
             <div className="auth-container">
+              {this.loggedIn()}
                 <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
                     {this.statusCheck()}
 
