@@ -14,7 +14,6 @@ Flask-Script==2.0.5
 Flask-SQLAlchemy==2.2
 itsdangerous==0.24
 Jinja2==2.9.6
--e git+https://github.com/DDJager/project-2.4.git@9467d3e8ef42096e562a4408b65e1a8363f1b0cd#egg=main&subdirectory=website
 Mako==1.0.6
 MarkupSafe==1.0
 mysqlclient==1.3.10
