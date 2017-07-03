@@ -140,7 +140,7 @@ class EditAccount extends Component{
                     <button onClick={this.nosePrevious}>{'<-'}</button>nose<button onClick={this.noseNext}>-></button><br/>
                     <button onClick={this.mouthPrevious}>{'<-'}</button>mouth<button onClick={this.mouthPrevious}>-></button><br/>
                 </div>
-                <input type="text" value={this.state.description} onChange={this.handleDescription}/>
+                <textarea rows="4" cols="50" value={this.state.description} onChange={this.handleDescription}/>
                 <button onClick={this.handleSubmit}>Submit</button>
             </div>
         )

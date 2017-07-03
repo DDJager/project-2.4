@@ -12,7 +12,7 @@ class Id extends Component {
             <div>
                 <img src={this.props.user.picture_url} alt={this.props.user.username}/>
                 <h1>{this.props.user.username}</h1>
-                <p>
+                <p style={{'white-space': 'pre-line'}}>
                     {this.props.user.description}
                 </p>
             </div>
