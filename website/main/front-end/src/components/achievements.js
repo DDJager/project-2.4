@@ -58,24 +58,20 @@ class Achievements extends Component {
             return (<div></div>)
         }
         return (
-            <div className="content-section z-depth-2 grey lighten-5">
-                <div className="row">
-                    <div className="col s10 offset-s1">
-                         <div className="content-text-section">
-                            <h4><b>Achievements</b></h4>
-                            <select
-                                onChange={this.onChangeHandle}
-                                value={this.state.selectedGame}>
+            <div className="col s10 offset-s1">
+                 <div className="content-text-section">
+                    <h4><b>Achievements</b></h4>
+                    <select
+                        onChange={this.onChangeHandle}
+                        value={this.state.selectedGame}>
 
-                                <option defaultValue> -- select a game -- </option>
-                                {this.dropdownOptions()}
+                        <option defaultValue> -- select a game -- </option>
+                        {this.dropdownOptions()}
 
-                            </select>
+                    </select>
 
-                            {/*list of all achievements belonging to the selected game*/}
-                            { this.achievementList() }
-                        </div>
-                    </div>
+                    {/*list of all achievements belonging to the selected game*/}
+                    { this.achievementList() }
                 </div>
             </div>
 

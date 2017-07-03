@@ -46,15 +46,24 @@ class userSearch extends Component{
 
     render() {
         return (
-            <div>
-                {this.state.redirect}
-                <input
-                    type="text"
-                    value={this.state.name}
-                    onChange={this.handleInputChange}
-                    onKeyPress={this.handleKeyPress}/>
-                <button onClick={this.redirect}>Go</button>
-            </div>
+          <div className="content-section z-depth-2 grey lighten-5">
+              {this.state.redirect}
+              <div className="row">
+                  <div className="col s10 offset-s1">
+                      <div className="content-text-section" style={{fontSize: '1em'}}>
+                          <h3>Search Player</h3>
+                          <input
+                              type="text"
+                              value={this.state.name}
+                              onChange={this.handleInputChange}
+                              onKeyPress={this.handleKeyPress}
+                              placeholder="test"
+                          />
+                          <button className="btn" onClick={this.redirect}>Search</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
         )
     }
 }

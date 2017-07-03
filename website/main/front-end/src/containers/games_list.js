@@ -15,7 +15,23 @@ class GamesList extends Component {
     games() {
         return _.map(this.props.games, (game)=>{
             const target = `/games/${game.name}`;
-            return <li key={game.id}><Link to={target}>{game.name}</Link></li>
+            return (
+              // <li key={game.id}>
+              <div className="col s6 m6 l4 xl4">
+                <div className="card blue-grey darken-1">
+                  <div className="card-content white-text">
+                    <span className="card-title">{game.name}</span>
+                    <p className="">
+                      {game.description}
+                    </p>
+                  </div>
+                  <div className="card-action">
+                    <Link className="btn" to={target}>View</Link>
+                  </div>
+                </div>
+              </div>
+              // </li>
+            )
         });
     }
 
@@ -35,9 +51,11 @@ class GamesList extends Component {
                             <div className="profile-section">
                                 <h1>Game list</h1>
                             </div>
-                            <ul>
+                            {/* <ul> */}
+                            <div className="row">
                                 {this.games()}
-                            </ul>
+                            </div>
+                            {/* </ul> */}
                         </div>
                     </div>
                 </div>

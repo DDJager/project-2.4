@@ -15,7 +15,6 @@ class Profile extends Component {
     * calls the action creators to fetch data
     */
     componentDidMount() {
-
         //Check if there is a user logged in
         if (localStorage.getItem("token")) {
             this.props.loadGames();
@@ -26,16 +25,11 @@ class Profile extends Component {
                 this.props.loadMatchHistory(this.userId());
             }
             else{
-                // const interval = setInterval(()=>{
-                //     if (this.userId()){
-                //         this.props.loadAchievements(this.userId());
-                //         this.props.loadMatchHistory(this.userId());
-                //         clearInterval(interval);
-                //     }
-                // }, 1);
+                if (this.userId()) {
+                    this.props.loadAchievements(this.userId());
+                    this.props.loadMatchHistory(this.userId());
+                }
             }
-
-
 
             //Check if a not logged in users info is requested
             if (this.props.match.params.username) {
@@ -88,17 +82,12 @@ class Profile extends Component {
     }
 
     loadMissing() {
-
-            if (!this.userId() || !this.props.matchHistory[this.userId()]) {
-                // const interval = setInterval(()=>{
-                //     if (this.userId()){
-                //         this.props.loadAchievements(this.userId());
-                //         this.props.loadMatchHistory(this.userId());
-                //         clearInterval(interval);
-                //     }
-                // }, 1);
+        if (!this.userId() || !this.props.matchHistory[this.userId()]) {
+            if (this.userId()){
+                this.props.loadAchievements(this.userId());
+                this.props.loadMatchHistory(this.userId());
             }
-
+        }
     }
 
     render() {
@@ -106,20 +95,30 @@ class Profile extends Component {
         return (
             <div>
                 {this.loggedIn()}
-                <UserSearch/>
-                <Id user={this.user()}/>
-                <MatchHistory stats={this.gamesStats()}/>
-                <Achievements
-                    achievements={this.props.achievements}
-                    userId={this.userId()}
-                    games={this.props.games}/>
+                <UserSearch />
+                <Id user={this.user()} />
+                <div className="content-section z-depth-2 grey lighten-5">
+                    <div className="row">
+                        <div className="col s11 m5 l5 xl5 offset-m1 offset-l1 offset-xl1 offset-s1">
+                          <MatchHistory stats={this.gamesStats()} />
+                        </div>
+                        <div className="col s11 offset-s1 m6 l6 xl6 ">
+                            <Achievements
+                                achievements={this.props.achievements}
+                                userId={this.userId()}
+                                games={this.props.games} />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
+  // console.log(this.props, state);
     return {
+        ...state,
         games: state.games,
         players: state.players,
         achievements: state.achievements,
@@ -129,7 +128,12 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({loadUsername, loadGames, loadAchievements, loadMatchHistory}, dispatch)
+    return bindActionCreators({
+      loadUsername,
+      loadGames,
+      loadAchievements,
+      loadMatchHistory
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

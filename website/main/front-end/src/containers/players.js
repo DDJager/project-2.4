@@ -43,6 +43,7 @@ class Players extends Component {
 
 function bindStateToProps(state) {
     return {
+        ...state,
         players: state.players,
         user: state.user
     }
