@@ -21,18 +21,19 @@ class Profile extends Component {
 
             //Check if the user is already loaded so further information can be requested from the api
             if (this.userId()) {
+                console.log('test')
                 this.props.loadAchievements(this.userId());
                 this.props.loadMatchHistory(this.userId());
             }
-            // else{
-            //     const interval = setInterval(()=>{
-            //         if (this.userId()){
-            //             this.props.loadAchievements(this.userId());
-            //             this.props.loadMatchHistory(this.userId());
-            //             clearInterval(interval);
-            //         }
-            //     }, 1);
-            // }
+            else{
+                const interval = setInterval(()=>{
+                    if (this.userId()){
+                        this.props.loadAchievements(this.userId());
+                        this.props.loadMatchHistory(this.userId());
+                        clearInterval(interval);
+                    }
+                }, 1);
+            }
 
 
 
@@ -82,16 +83,21 @@ class Profile extends Component {
     }
 
     loadMissing() {
-        if (this.userId()) {
-            if (!this.props.matchHistory) {
-                this.props.loadAchievements(this.userId());
-                this.props.loadMatchHistory(this.userId());
+
+            if (!this.userId() || !this.props.matchHistory[this.userId()]) {
+                const interval = setInterval(()=>{
+                    if (this.userId()){
+                        this.props.loadAchievements(this.userId());
+                        this.props.loadMatchHistory(this.userId());
+                        clearInterval(interval);
+                    }
+                }, 1);
             }
-        }
+
     }
 
     render() {
-        // this.loadMissing();
+        this.loadMissing();
         return (
             <div><UserSearch/>
                 <Id user={this.user()}/>

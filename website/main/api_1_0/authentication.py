@@ -21,7 +21,7 @@ def get_picture_url():
     return picture_url
 
 @api.route('/signup', methods=['POST'])
-@api.route('/signup/', methods=['POST'])
+#@api.route('/signup/', methods=['POST'])
 def sign_up():
     username = request.json.get('username')
     password = request.json.get('password')
