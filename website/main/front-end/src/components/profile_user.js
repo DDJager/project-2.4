@@ -10,9 +10,8 @@ class Id extends Component {
                 <div className="row">
                     <div className="col s10 offset-s1">
                         <div className="content-text-section">
-
                             <div className="profile-picture">
-                                <img src={`${this.props.user.picture_url}`} alt={this.props.user.username} width={100} height={100} />
+                                <img src={this.props.user.picture_url} alt={this.props.user.username} width={100} height={100} />
                             </div>
                             <div className="profile-info">
                                 <h3>@{this.props.user.username}</h3>
