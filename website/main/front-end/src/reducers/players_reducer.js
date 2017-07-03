@@ -1,10 +1,22 @@
-import { PLAYERS } from '../actions/index'
+import _ from 'lodash';
+
+import { PLAYERS, USER } from '../actions/index'
 
 export default function(state = {}, action) {
     if (action.type === PLAYERS) {
-        const list = {list:action.payload.data};
-        return list;
-    }else {
-        return state;
+        const data = action.payload.data;
+        let newState = Object.assign({}, state);
+        _.map(data, (player)=>{
+            newState[player.id] = player;
+        });
+        return newState;
+    }else if(action.type === USER){
+        if (action.payload.status){
+            const {user} = action.payload.data;
+            let newState = Object.assign({}, state);
+            newState[user.id] = user;
+            return newState;
+        }
     }
+    return state;
 }

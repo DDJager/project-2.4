@@ -4,20 +4,31 @@ const URL = `http://localhost:5000/api/v1-0`;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
-export const LOAD_PROFILE = 'loadProfile';
 export const GAMES = 'games';
 export const PLAYERS = 'users';
+export const USER = 'user';
 export const AUTH_CHECK = 'authCheck';
 export const LOGOUT = 'logout';
 export const ACHIEVEMENTS = ' achievements';
+export const MATCH_HISTORY = 'matchHistory';
+export const UPDATE_ACCOUNT = 'updateAccount';
 
 export function createAccount(values, success, failed) {
-    const target = `${URL}/authenticate/`;
+    const target = `${URL}/signup`;
     const request = axios.post(target, values)
         .then((response)=>success())
         .catch(()=>failed());
     return {
         type: CREATE_ACCOUNT,
+        payload: request
+    }
+}
+
+export function updateAccount(id, values) {
+    const target = `${URL}/user/update/${id}`;
+    const request = axios.post(target, values);
+    return {
+        type: UPDATE_ACCOUNT,
         payload: request
     }
 }
@@ -37,16 +48,6 @@ export function login(values) {
     }
 }
 
-export function loadProfile(id) {
-    const target = `${URL}/user/${id}/profile`;
-    const request= axios.get(target);
-
-    return {
-        type: LOAD_PROFILE,
-        payload: request
-    }
-}
-
 export function loadGames() {
     const target = `${URL}/games/`;
     const headers = {
@@ -62,7 +63,7 @@ export function loadGames() {
 }
 
 export function loadUsers() {
-    const target = `${URL}/users/`;
+    const target = `${URL}/users`;
     const headers = {
         auth: {
             username: localStorage.getItem("token")
@@ -71,6 +72,20 @@ export function loadUsers() {
     const request = axios.get(target, headers);
     return {
         type: PLAYERS,
+        payload: request
+    }
+}
+
+export function loadUsername(username) {
+    const target = `${URL}/search/user/${username}`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: USER,
         payload: request
     }
 }
@@ -110,6 +125,20 @@ export function loadAchievements(id) {
     const request = axios.get(target, headers);
     return {
         type: ACHIEVEMENTS,
+        payload: request
+    }
+}
+
+export function loadMatchHistory(id) {
+    const target = `${URL}/history/${id}`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: MATCH_HISTORY,
         payload: request
     }
 }

@@ -5,6 +5,9 @@ import React, { Component } from 'react';
 
 class Id extends Component {
     render() {
+        if (!this.props.user) {
+            return (<h4>user not found</h4>);
+        }
         return(
             <div className="content-section z-depth-2 grey lighten-5">
                 <div className="row">
@@ -15,7 +18,7 @@ class Id extends Component {
                             </div>
                             <div className="profile-info">
                                 <h3>@{this.props.user.username}</h3>
-                                <p>{this.props.user.description}</p>
+                                <p style={{'whiteSpace': 'pre-line'}}>{this.props.user.description}</p>
                             </div>
 
                         </div>

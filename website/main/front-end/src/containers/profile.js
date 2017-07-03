@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
 import { Redirect } from 'react-router-dom';
 
-import { loadGames, loadUsers, loadAchievements } from '../actions/index';
+import { loadGames, loadUsername, loadAchievements, loadMatchHistory } from '../actions/index';
 import Id from '../components/profile_user';
 import MatchHistory from '../components/match_history';
 import Achievements from '../components/achievements';
-
+import UserSearch from './user_search';
 
 class Profile extends Component {
     /*
@@ -19,11 +19,27 @@ class Profile extends Component {
         //Check if there is a user logged in
         if (localStorage.getItem("token")) {
             this.props.loadGames();
-            this.props.loadAchievements(this.userId());
+
+            //Check if the user is already loaded so further information can be requested from the api
+            if (this.userId()) {
+                this.props.loadAchievements(this.userId());
+                this.props.loadMatchHistory(this.userId());
+            }
+            else{
+                // const interval = setInterval(()=>{
+                //     if (this.userId()){
+                //         this.props.loadAchievements(this.userId());
+                //         this.props.loadMatchHistory(this.userId());
+                //         clearInterval(interval);
+                //     }
+                // }, 1);
+            }
+
+
 
             //Check if a not logged in users info is requested
-            if (this.props.match.params.username){
-                this.props.loadUsers();
+            if (this.props.match.params.username) {
+                this.props.loadUsername(this.props.match.params.username);
             }
         }
     }
@@ -35,12 +51,12 @@ class Profile extends Component {
      */
     user() {
         const params = this.props.match.params;
-        const players = this.props.players.list;
+        const players = this.props.players;
 
         if (params.username && players){
-            for (let i = 0; i < players.length; i++) {
-                if (players[i].username === params.username) {
-                    return players[i];
+            for (let player in players) {
+                if (players[player].username === params.username) {
+                    return players[player];
                 }
             }
         }else{
@@ -60,17 +76,39 @@ class Profile extends Component {
     }
     userId() {
         if (this.props.match.params.username){
-            return localStorage.id;
+            const user = this.user();
+            return user ? user.id : user;
         }
         return localStorage.id;
     }
 
+    gamesStats() {
+        const id = this.userId();
+        return id ? this.props.matchHistory[id] : {};
+    }
+
+    loadMissing() {
+
+            if (!this.userId() || !this.props.matchHistory[this.userId()]) {
+                // const interval = setInterval(()=>{
+                //     if (this.userId()){
+                //         this.props.loadAchievements(this.userId());
+                //         this.props.loadMatchHistory(this.userId());
+                //         clearInterval(interval);
+                //     }
+                // }, 1);
+            }
+
+    }
+
     render() {
+        this.loadMissing();
         return (
             <div>
                 {this.loggedIn()}
+                <UserSearch/>
                 <Id user={this.user()}/>
-                <MatchHistory/>
+                <MatchHistory stats={this.gamesStats()}/>
                 <Achievements
                     achievements={this.props.achievements}
                     userId={this.userId()}
@@ -85,12 +123,13 @@ function mapStateToProps(state) {
         games: state.games,
         players: state.players,
         achievements: state.achievements,
+        matchHistory: state.matchHistory,
         user: state.user
     };
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({loadUsers, loadGames, loadAchievements}, dispatch)
+    return bindActionCreators({loadUsername, loadGames, loadAchievements, loadMatchHistory}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

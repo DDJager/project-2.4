@@ -2,11 +2,6 @@ from . import api
 from flask import jsonify, request, g
 from main.models import db, auth, User
 
-
-# Example code
-# {
-#
-# }
 @api.route('/user/update', methods=['POST'], defaults={'user_id': None})
 @api.route('/user/update/', methods=['POST'], defaults={'user_id': None})
 @api.route('/user/update/<int:user_id>', methods=['POST'])
@@ -57,7 +52,6 @@ def update_user(user_id):
             'ranking': user.ranking
         }
     }), 200
-
 
 @api.route('/user', defaults={'user_id': None})
 @api.route('/user/', defaults={'user_id': None})
@@ -139,6 +133,7 @@ def get_users():
     # Loop trough all users. Append a list with the db row data everytime
     for user in users:
         data.append({
+            'id': user.id,
             'username': user.username,
             'picture_url': user.picture_url,
             'description': user.description

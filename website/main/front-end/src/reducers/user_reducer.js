@@ -24,7 +24,6 @@ export default function (state = {}, action) {
                     status: 'failed'
                 }
             }
-            break;
         case AUTH_CHECK:
             if (action.payload.status){
                 const data = action.payload.data;
@@ -45,10 +44,8 @@ export default function (state = {}, action) {
                 localStorage.removeItem("token");
                 return {};
             }
-            break;
         case LOGOUT:
             return {};
-            break;
         default:
             return state;
     }

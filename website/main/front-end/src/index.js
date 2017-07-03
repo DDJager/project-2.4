@@ -15,6 +15,7 @@ import profile from './containers/profile';
 import players from './containers/players';
 import GamesList from './containers/games_list';
 import Game from './containers/game';
+import Edit from './containers/update_profile';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -30,6 +31,7 @@ ReactDOM.render(
                     <Route path="/players" component={players}/>
                     <Route path="/games/:name" component={Game}/>
                     <Route path="/games" component={GamesList}/>
+                    <Route path="/edit" component={Edit}/>
                     <Route path="/" component={root}/>
                 </Switch>
                 <Footer/>

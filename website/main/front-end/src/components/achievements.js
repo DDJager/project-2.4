@@ -35,7 +35,6 @@ class Achievements extends Component {
         });
     }
 
-// TODO get info about the owned achievements
     achievementList() {
         const selected = this.state.selectedGame;
         return _.map(this.props.achievements[this.props.userId], (achieve) => {
@@ -47,7 +46,7 @@ class Achievements extends Component {
 
     achievement(achieve) {
         return (
-            <div className="achievement">
+            <div className="achievement" key={achieve.name}>
                 <h4>{achieve.name}</h4><br/>
                 {achieve.description}
             </div>
@@ -55,6 +54,9 @@ class Achievements extends Component {
     }
 
     render() {
+        if (this.props.user) {
+            return (<div></div>)
+        }
         return (
             <div className="content-section z-depth-2 grey lighten-5">
                 <div className="row">
