@@ -5,6 +5,11 @@ const URL = `http://localhost:5000/api/v1-0`;
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
 export const LOAD_PROFILE = 'loadProfile';
+export const GAMES = 'games';
+export const PLAYERS = 'users';
+export const AUTH_CHECK = 'authCheck';
+export const LOGOUT = 'logout';
+export const ACHIEVEMENTS = ' achievements';
 
 export function createAccount(values, success, failed) {
     const target = `${URL}/authenticate/`;
@@ -38,6 +43,73 @@ export function loadProfile(id) {
 
     return {
         type: LOAD_PROFILE,
+        payload: request
+    }
+}
+
+export function loadGames() {
+    const target = `${URL}/games/`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: GAMES,
+        payload: request
+    }
+}
+
+export function loadUsers() {
+    const target = `${URL}/users/`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: PLAYERS,
+        payload: request
+    }
+}
+
+export function checkLogin() {
+    const target = `${URL}/token`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: AUTH_CHECK,
+        payload: request
+    }
+}
+
+export function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("username");
+    localStorage.removeItem("picture_url");
+    localStorage.removeItem("description");
+    return {
+        type: LOGOUT
+    }
+}
+
+export function loadAchievements(id) {
+    const target = `${URL}/achievements/${id}`;
+    const headers = {
+        auth: {
+            username: localStorage.getItem("token")
+        }
+    };
+    const request = axios.get(target, headers);
+    return {
+        type: ACHIEVEMENTS,
         payload: request
     }
 }

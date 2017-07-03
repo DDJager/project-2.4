@@ -34,34 +34,40 @@ class signUp extends Component {
 
     render() {
         return (
-            <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-                {this.state.status}
-                <Field
-                    label="Username"
-                    name="username"
-                    type="text"
-                    component={formInput}
-                />
-                <Field
-                    label="Description"
-                    name="description"
-                    type="text"
-                    component={formInput}
-                />
-                <Field
-                    label="Password"
-                    name="password"
-                    type="password"
-                    component={formInput}
-                />
-                <Field
-                    label="Password confirmation"
-                    name="passwordConfirmation"
-                    type="password"
-                    component={formInput}
-                />
-                <button className="btn btn-primary" type="submit">Sign up</button>
-            </form>
+            <div className="auth-container">
+                <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+                    {this.state.status}
+                    <Field
+                        label="Username"
+                        name="username"
+                        type="text"
+                        className="auth-label"
+                        component={formInput}
+                    />
+                    <Field
+                        label="Description"
+                        name="description"
+                        type="text"
+                        className="auth-label"
+                        component={formInput}
+                    />
+                    <Field
+                        label="Password"
+                        name="password"
+                        type="password"
+                        className="auth-label"
+                        component={formInput}
+                    />
+                    <Field
+                        label="Password confirmation"
+                        name="passwordConfirmation"
+                        type="password"
+                        className="auth-label"
+                        component={formInput}
+                    />
+                    <button className="btn" type="submit">Sign up</button>
+                </form>
+            </div>
         );
     }
 }

@@ -1,24 +1,66 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { checkLogin, logout } from '../actions/index';
 
 class Header extends Component {
-    render() {
-        return (
-            <div className="header">
-                <Link to="/"><div className="btn">Home</div></Link>
 
-                <Link to="/profile"><div className="btn">Profile</div></Link>
-                <span>{this.props.user.token ? this.props.user.token : <Link to="/authenticate"><div className="btn">Authenticate</div></Link>}</span>
-            </div>
+    loggedIn() {
+      if(localStorage.getItem("token")) {
+        const username = localStorage.getItem("username");
+        const profileLink = "/profile/" + username;
+        return (
+          <div className="header teal darken-2 z-depth-3 section">
+              <div className="row row-no-margin-bottom">
+                  <div className="col s10 offset-s1 navigation">
+                      <Link to="/" className="section">Home</Link>
+                      <Link to={profileLink} className="section">Profile</Link>
+                      <Link to="/players" className="section">Players</Link>
+                      <Link to="/games" className="section">Games</Link>
+                      <span className="user-welcome">{username}</span>
+                      <button onClick={this.props.logout}>Logout</button>
+                  </div>
+              </div>
+          </div>
         )
+      } else {
+        return (
+          <div className="header teal darken-2 z-depth-3 section">
+              <div className="row row-no-margin-bottom">
+                  <div className="col s10 offset-s1 navigation">
+                      <Link to="/" className="section">Home</Link>
+                      <Link to="/login" className="section">Sign In</Link>
+                  </div>
+              </div>
+          </div>
+        )
+      }
     }
+
+    render() {
+      return(
+        <div className="header">
+        {this.loggedIn()}
+        </div>
+      )
+    }
+
 }
 
+/*
+* User is only imported to let this component re-render
+* once change happens to the login status
+ */
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user:state.user
     }
 }
 
-export default connect(mapStateToProps)(Header);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({checkLogin, logout}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

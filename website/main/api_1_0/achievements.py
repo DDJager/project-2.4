@@ -37,18 +37,20 @@ def get_achievements_where_user_id_is(user_id):
     
     return jsonify({
         'status': 'success',
-        'achievements': achievements
+        'achievements': achievements,
+        'id': user_id
     }), 200
 
 
 
 @api.route('/achievements')
 @api.route('/achievements/')
-@auth.login_required
+#@auth.login_required
 def get_achievements():
     achievements = get_achievements_from_user(g.user.id)
 
     return jsonify({
         'status': 'success',
-        'achievements': achievements
+        'achievements': achievements,
+        'id': g.user.id
     }), 200
