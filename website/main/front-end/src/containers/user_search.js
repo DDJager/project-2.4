@@ -45,7 +45,6 @@ class userSearch extends Component{
     }
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 {this.state.redirect}

@@ -25,16 +25,10 @@ export function createAccount(values, success, failed) {
 }
 
 export function updateAccount(id, values) {
-    const target = `${URL}/authenticate/`;
-    const headers = {
-        auth: {
-            username: values.username,
-            password: values.password
-        }
-    };
-    const request = axios.post(target, values, headers);
+    const target = `${URL}/user/update/${id}`;
+    const request = axios.post(target, values);
     return {
-        type: CREATE_ACCOUNT,
+        type: UPDATE_ACCOUNT,
         payload: request
     }
 }

@@ -21,7 +21,6 @@ class Profile extends Component {
 
             //Check if the user is already loaded so further information can be requested from the api
             if (this.userId()) {
-                console.log('test')
                 this.props.loadAchievements(this.userId());
                 this.props.loadMatchHistory(this.userId());
             }

@@ -20,7 +20,7 @@ class EditAccount extends Component{
         for(let i = 0; i < face.nose.length; i++) {
             if (picture_url.includes(face.nose[i])) {
                 nose = i;
-                break;this.state.face.eyes
+                break;
             }
         }
         for(let i = 0; i < face.mouth.length; i++) {
@@ -49,6 +49,7 @@ class EditAccount extends Component{
         this.noseNext = this.noseNext.bind(this);
         this.mouthPrevious = this.mouthPrevious.bind(this);
         this.mouthNext = this.mouthNext.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleDescription(event) {
@@ -58,7 +59,14 @@ class EditAccount extends Component{
     }
 
     handleSubmit() {
-        this.props.updateAccount();
+        const {face} = this.state;
+        const image = `https://api.adorable.io/avatars/face/${face.eyes[this.state.eyes]}/${face.nose[this.state.nose]}/${face.mouth[this.state.mouth]}/8e8895`;
+
+        const values = {
+            description: this.state.description,
+            picture_url: image
+        };
+        this.props.updateAccount(localStorage.getItem('id'), values);
     }
 
     eyesPrevious() {

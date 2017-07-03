@@ -10,7 +10,7 @@ class Id extends Component {
         }
         return(
             <div>
-                <img src={`http://${this.props.user.picture_url}`} alt={this.props.user.username}/>
+                <img src={this.props.user.picture_url} alt={this.props.user.username}/>
                 <h1>{this.props.user.username}</h1>
                 <p>
                     {this.props.user.description}
