@@ -27,7 +27,7 @@ def get_user(user_id):
 
 @api.route('/users/')
 @api.route('/users')
-#@auth.login_required
+@auth.login_required
 def get_users():
 
     # SELECT * FROM users

@@ -1,10 +1,99 @@
+html,
+body, #root {
+    height: 100%;
+}
+
+#root {
+    position:relative;
+}
+
 .header {
     background-color: black;
     width: 100%;
     min-height: 50px;
+    border-bottom: 5px solid #80cbc4;
+}
+
+.row-no-margin-bottom {
+    margin-bottom: 0px;
+}
+
+.row-no-margin-right {
+    margin-right: 0px;
+}
+
+.content-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.content-text-section {
+    padding: 50px 0;
+    color: #313131;
+}
+
+.user-welcome-border {
+    display: inline-block;
+    border-left: 2px solid #80cbc4;
+    padding-left: 50px;
+}
+
+.content-text-section h1, .content-text-section h4 {
+    font-family: 'Raleway', sans-serif;
+}
+
+.content-text-section p,
+.content-text-section a {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+}
+
+.user-welcome {
+    margin-right: 50px;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+}
+
+.profile-section {
+    margin-bottom: 25px;
 }
 
 .footer {
+    /*position: absolute;*/
+    /*bottom: 0px;*/
     width: 100%;
     background-color: gray;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    border-bottom: 5px solid #80cbc4;
+}
+
+.auth-container > form > div > label,
+.auth-container > form > div > input[type="text"] {
+    font-size: 16px;
+}
+
+.auth-btn {
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.navigation a {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    margin-right: 50px;
+    display:inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.navigation a:hover {
+
 }
