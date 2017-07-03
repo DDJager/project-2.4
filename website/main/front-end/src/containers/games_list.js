@@ -26,6 +26,7 @@ class GamesList extends Component {
                     </p>
                   </div>
                   <div className="card-action">
+                    {this.playButton(game.name)}&nbsp;
                     <Link className="btn" to={target}>View</Link>
                   </div>
                 </div>
@@ -33,6 +34,14 @@ class GamesList extends Component {
               // </li>
             )
         });
+    }
+
+    playButton(name) {
+      if (name == 'Guess The Word') {
+        return <a className="btn" href="http://localhost:8080/">Play</a>;
+      } else {
+        return;
+      }
     }
 
     loggedIn() {
