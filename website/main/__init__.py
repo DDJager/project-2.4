@@ -12,11 +12,12 @@
 from flask import Flask
 from flask_script import Manager
 from flask_pymongo import PyMongo
-
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 manager = Manager(app)
 mongo = PyMongo(app)
+CORS(app, supports_credentials=True)
 
 # Import Blueprints
 from .api_1_0 import api as api_1_0_blueprint
