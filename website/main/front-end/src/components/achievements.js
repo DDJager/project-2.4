@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+
+
 class Achievements extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedGame: ''
+            selectedGame: 'Guess The Word'
         };
         this.onChangeHandle = this.onChangeHandle.bind(this);
     }
@@ -36,17 +38,24 @@ class Achievements extends Component {
     }
 
     achievementList() {
-        const selected = this.state.selectedGame;
-        return _.map(this.props.achievements[this.props.userId], (achieve) => {
-            if (achieve.game.id == selected) {
-                return this.achievement(achieve);
-            }
+        // const selected = this.state.selectedGame;
+        // return _.map(this.props.achievements[this.props.userId], (achieve) => {
+        //     if (achieve.game.id == selected) {
+        //         return this.achievement(achieve);
+        //     }
+        // })
+        // for (let i = 0; i < this.props.achievements.length; i++) {
+        //   return this.achievement(item);
+        // }
+        return _.map(this.props.achievements[this.props.userId], (item) => {
+          return this.achievement(item);
         })
     }
 
     achievement(achieve) {
+      // return <li className="collection-item" key={new Date() + achieve.description}>lala</li>
         return (
-            <div className="achievement" key={achieve.name}>
+            <div className="collection-item" key={achieve.id + achieve.name}>
                 <h4>{achieve.name}</h4><br/>
                 {achieve.description}
             </div>
@@ -54,6 +63,7 @@ class Achievements extends Component {
     }
 
     render() {
+      console.log(this.props.achievements);
         if (this.props.user) {
             return (<div></div>)
         }
@@ -61,17 +71,19 @@ class Achievements extends Component {
             <div className="col s10 offset-s1">
                  <div className="content-text-section">
                     <h4><b>Achievements</b></h4>
-                    <select
+                    {/* <select
                         onChange={this.onChangeHandle}
                         value={this.state.selectedGame}>
 
                         <option defaultValue> -- select a game -- </option>
                         {this.dropdownOptions()}
 
-                    </select>
+                    </select> */}
 
                     {/*list of all achievements belonging to the selected game*/}
+                    <ul className="collection">
                     { this.achievementList() }
+                  </ul>
                 </div>
             </div>
 
