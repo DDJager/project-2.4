@@ -37,7 +37,8 @@ class GamesList extends Component {
     }
 
     playButton(name) {
-      if (name === 'Guess The Word') {
+      // eslint-disable-next-line
+      if (name == 'Guess The Word') {
         return <a className="btn" href="http://localhost:8080/">Play</a>;
       } else {
         return;

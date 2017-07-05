@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 class Id extends Component {
 
     editButton(user) {
-        if (user.id === localStorage.getItem('id')) {
+        // eslint-disable-next-line
+        if (user.id == localStorage.getItem('id')) {
             return <Link to="/edit" className="btn">Edit</Link>
         }
     }
