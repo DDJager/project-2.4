@@ -148,19 +148,69 @@ class EditAccount extends Component{
         const {face} = this.state;
         const image = `https://api.adorable.io/avatars/face/${face.eyes[this.state.eyes]}/${face.nose[this.state.nose]}/${face.mouth[this.state.mouth]}/${this.state.color}`;
         return (
-            <div>
-                <div>
-                    <img src={image} alt="avatar" className="img-responsive"/>
-                    <button onClick={this.eyesPrevious}>{'<-'}</button>eyes<button onClick={this.eyesNext}>-></button><br/>
-                    <button onClick={this.nosePrevious}>{'<-'}</button>nose<button onClick={this.noseNext}>-></button><br/>
-                    <button onClick={this.mouthPrevious}>{'<-'}</button>mouth<button onClick={this.mouthPrevious}>-></button><br/>
-                    <SketchPicker
-                        color={ this.state.color }
-                        onChangeComplete={ this.handleColorChange }
-                    />
+            <div className="content-section z-depth-2 grey lighten-5">
+                <div className="row">
+                    <div className=" col s2 offset-s2">
+                        <img src={image} alt="avatar" className="img-responsive" />
+                    </div>
+                    <div className="col s2 selectors">
+                        <div className="section">
+                            <button onClick={this.eyesPrevious} className="select-btn btn">
+                                <i className="material-icons">skip_previous</i>
+                            </button>
+                            eyes
+                            <button onClick={this.eyesNext} className="select-btn btn">
+                                <i className="material-icons">skip_next</i>
+                            </button><br/>
+                        </div>
+
+                        <div className="section">
+                            <button onClick={this.nosePrevious} className="select-btn btn">
+                                <i className="material-icons">skip_previous</i>
+                            </button>
+                            nose
+                            <button onClick={this.noseNext} className="select-btn btn">
+                                <i className="material-icons">skip_next</i>
+                            </button><br/>
+                        </div>
+
+                        <div className="section">
+                            <button onClick={this.mouthPrevious} className="select-btn btn">
+                                <i className="material-icons">skip_previous</i>
+                            </button>
+                            mouth
+                            <button onClick={this.mouthPrevious} className="select-btn btn">
+                                <i className="material-icons">skip_next</i>
+                            </button><br/>
+                        </div>
+                    </div>
+
+                    <div className="col s2">
+                        <SketchPicker
+                              color={ this.state.color }
+                              onChangeComplete={ this.handleColorChange }
+                        />
+                    </div>
+
                 </div>
-                <textarea rows="4" cols="50" value={this.state.description} onChange={this.handleDescription}/>
-                <button onClick={this.handleSubmit}>Submit</button>
+
+                <div className="row">
+                    <div className="col s8 offset-s2">
+                        <textarea className="description-edit" rows="4" cols="50"
+                                  value={this.state.description}
+                                  onChange={this.handleDescription}/>
+                    </div>
+
+                </div>
+                    <div className="row">
+                        <div className="col s2 offset-s5">
+                            <button onClick={this.handleSubmit}
+                                    className="submit-btn">
+                                Submit changes</button>
+                        </div>
+
+                </div>
+
             </div>
         )
     }

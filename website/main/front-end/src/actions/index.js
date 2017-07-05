@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = `http://localhost:5000/api/v1-0`;
+const URL = `http://192.168.0.107:5000/api/v1-0`;
 
 export const CREATE_ACCOUNT = 'createAccount';
 export const LOGIN = 'login';
