@@ -57,7 +57,7 @@ class userSearch extends Component{
                               value={this.state.name}
                               onChange={this.handleInputChange}
                               onKeyPress={this.handleKeyPress}
-                              placeholder="test"
+                              placeholder="..."
                           />
                           <button className="btn" onClick={this.redirect}>Search</button>
                       </div>
