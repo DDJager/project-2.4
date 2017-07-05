@@ -15,7 +15,14 @@ class Header extends Component {
           <div className="header teal darken-2 z-depth-3 section">
               <div className="row row-no-margin-bottom">
                   <div className="col s10 offset-s1 navigation">
-                      <span className="user-welcome"><img className="circle" src={localStorage.getItem('picture_url')} width={50} height={50} /> @{username}</span>
+                      <span className="user-welcome">
+                        <img
+                          className="circle"
+                          alt=""
+                          src={localStorage.getItem('picture_url')}
+                          width={50}
+                          height={50} /> @{username}
+                      </span>
                       <Link to="/" className="section">Home</Link>
                       <Link to={profileLink} className="section">Profile</Link>
                       <Link to="/players" className="section">Players</Link>

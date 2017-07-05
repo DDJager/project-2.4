@@ -3,10 +3,6 @@
  */
 import React from 'react';
 
-const style = {
-    minHeight: '500px'
-};
-
 export default () => {
     return (
         <div className="content-section z-depth-2 grey lighten-5">

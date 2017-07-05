@@ -17,7 +17,7 @@ class GamesList extends Component {
             const target = `/games/${game.name}`;
             return (
               // <li key={game.id}>
-              <div className="col s6 m6 l4 xl4">
+              <div key={game.id} className="col s6 m6 l4 xl4">
                 <div className="card blue-grey darken-1">
                   <div className="card-content white-text">
                     <span className="card-title">{game.name}</span>
@@ -37,7 +37,7 @@ class GamesList extends Component {
     }
 
     playButton(name) {
-      if (name == 'Guess The Word') {
+      if (name === 'Guess The Word') {
         return <a className="btn" href="http://localhost:8080/">Play</a>;
       } else {
         return;

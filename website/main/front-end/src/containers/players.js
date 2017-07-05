@@ -18,7 +18,11 @@ class Players extends Component {
                     const target = `/profile/${player.username}`;
                     return (
                         <li className="collection-item avatar" key={player.username}>
-                          <img src={player.picture_url} width={75} height={75} />
+                          <img
+                            src={player.picture_url}
+                            alt=""
+                            width={75}
+                            height={75} />
                           <span className="title" style={{fontSize: '2em'}}> @{player.username} </span>
                           <Link to={target} className="secondary-content btn">View Profile</Link>
                         </li>
