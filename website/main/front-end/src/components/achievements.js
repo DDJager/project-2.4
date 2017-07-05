@@ -63,7 +63,6 @@ class Achievements extends Component {
     }
 
     render() {
-      console.log(this.props.achievements);
         if (this.props.user) {
             return (<div></div>)
         }
