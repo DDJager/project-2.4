@@ -205,7 +205,7 @@ class EditAccount extends Component{
                     <div className="row">
                         <div className="col s2 offset-s5">
                             <button onClick={this.handleSubmit}
-                                    className="submit-btn">
+                                    className="btn">
                                 Submit changes</button>
                         </div>
 
